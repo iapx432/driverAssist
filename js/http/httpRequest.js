@@ -13,9 +13,7 @@ export async function httpRequest(
         );
 
     if (!response.ok) {
-        throw new Error(
-            `HTTP [${response.status}]: ${response.statusText}`
-        );
+        throw response;
     }
 
     return await response.json();

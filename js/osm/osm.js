@@ -8,7 +8,10 @@
 import { httpRequest }
 from '../http/httpRequest.js';
 
-const OSM_API_URL = 'https://overpass-api.de/api/interpreter';
+import { logInfo }
+from '../log/application-log.js';
+
+const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 
 export async function getRoadInfo(
     lat,
@@ -23,15 +26,88 @@ way(around:20,${lat},${lng})
 out tags;
 `;
 
-    return await httpRequest(
-
-        OSM_API_URL,
+    return await overpassRequest(
         {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain'},
             body: query
         }
     );
+}
+
+async function overpassRequest(
+    query
+) {
+
+    while (true) {
+
+        try {
+
+            return await httpRequest(
+                OVERPASS_URL,
+                query
+            );
+
+        }
+        catch (error) {
+
+            if (
+                error.status !== 429
+            ) {
+                throw error;
+            }
+
+            logInfo({message: 'Overpass rate limited'});
+
+            const delayMs =
+                await getOverpassRetryDelayMs();
+
+            logInfo({message: `Retrying in ${delayMs / 1000}s`});
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        delayMs
+                    )
+            );
+            
+            // await sleep(
+            //     delayMs
+            // );
+        }
+    }
+}
+
+async function getOverpassRetryDelayMs() {
+    const response =
+        await fetch(
+            'https://overpass-api.de/api/status'
+        );
+
+    const text =
+        await response.text();
+
+    console.log(text);
+
+    return parseRetryDelayMs(text);
+}
+
+function parseRetryDelayMs(
+    statusText
+) {
+    const match =
+        statusText.match(
+            /in (\d+) seconds/
+        );
+
+    if (!match) {
+        return 5000;
+    }
+
+    return (
+        Number(match[1]) + 1
+    ) * 1000;
 }
 
 export function extractRoadInfo(

@@ -17,6 +17,12 @@ from '../route/evidence.js';
 import { logInfo }
 from '../log/application-log.js';
 
+import { 
+    formatJourneyDistance,
+    formatLatitudeLongitude
+} 
+from '../utils/format.js';
+
 // this is a brittle imlementation, later requests will be sent to the domain handlers they are intended for, rather than being processed here in the acquisition engine. This is a temporary solution to get the acquisition engine working with the current code structure.
 // the domain handlers will decide how to fulful the requests and choose sources according to policies they implement.
 
@@ -33,7 +39,7 @@ export async function processAcquisitionRequests(
             request.type
         ) {
 
-            case 'roadProbe':
+            case 'environment.map.road.probe':
 
                 const point =
                 getCoordinateAtDistance(
@@ -41,7 +47,7 @@ export async function processAcquisitionRequests(
                     request.startM
                 );
 
-                logInfo({message: `Acquisition request: roadProbe at distance ${request.startM}m (${point.lat}, ${point.lng}) Started`});
+                logInfo({message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)} Started`});
 
                 const osm =
                     await getRoadInfo(
@@ -49,7 +55,7 @@ export async function processAcquisitionRequests(
                         point.lng
                     );
 
-                logInfo({message: `Acquisition request: roadProbe at distance ${request.startM}m (${point.lat}, ${point.lng}) Completed`});
+                logInfo({message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)} Completed`});
 
                 const roads =
                     extractRoadInfo(
@@ -66,7 +72,7 @@ export async function processAcquisitionRequests(
                             'osm',
 
                         type:
-                            'roadProbe',
+                            'environment.map.road.probe',
 
                         startM:
                             point.distanceM,

@@ -19,6 +19,8 @@ export function logInfo(
 ) {
     logEntry.level = 'info';
     log(logEntry);
+    
+    return logEntry;
 }
 
 function log(

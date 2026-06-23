@@ -41,6 +41,19 @@ body {
     flex: 1;
 }
 
+#splitter {
+    height: 6px;
+
+    cursor: ns-resize;
+
+    background: #d0d0d0;
+
+    border-top: 1px solid #b0b0b0;
+    border-bottom: 1px solid #b0b0b0;
+
+    flex-shrink: 0;
+}
+
 #bottomPane {
 
     height: 150px;

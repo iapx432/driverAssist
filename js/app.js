@@ -72,6 +72,68 @@ let route = null;
 
 initialiseRouteSelection(map);
 
+// add log pane splitter drag functionality
+const splitter =
+    document.getElementById(
+        'splitter'
+    );
+
+const bottomPane =
+    document.getElementById(
+        'bottomPane'
+    );
+
+// set initial height of bottom pane from local storage or default to 150px
+bottomPane.style.height =
+    localStorage.getItem(
+        'bottomPaneHeight'
+    ) ?? '150px';
+
+let dragging = false;    
+
+splitter.addEventListener(
+    'mousedown',
+    () => {
+        dragging = true;
+    }    
+);    
+
+document.addEventListener(
+    'mouseup',
+    () => {
+        dragging = false;
+    }    
+);    
+
+document.addEventListener(
+    'mousemove',
+    event => {
+
+        if (!dragging) {
+            return;
+        }
+
+        const newHeight =
+            Math.max(
+                50,
+                Math.min(
+                    800,
+                    window.innerHeight -
+                    event.clientY
+                )
+            );
+
+        // save new height to local storage
+        localStorage.setItem(
+            'bottomPaneHeight',
+            newHeight
+        );
+
+        bottomPane.style.height =
+            `${newHeight}px`;
+    }
+);
+
 logInfo({message: 'openmatrixproject Driver Assist application started.'});
 logInfo({message: ''});
 logInfo({message: 'Click on the map to select journey start point'});
@@ -102,9 +164,9 @@ document
             addSteepnessEvidence(route);
             runInference(route);
             refreshAcquisitionRequestsUi(route);
-            logInfo({message: 'Processing acquisition requests: Started'});
+            logInfo({message: 'Acquisition: Processing Started'});
             await processAcquisitionRequests(route);
-            logInfo({message: 'Processing acquisition requests: Completed'});
+            logInfo({message: 'Acquisition: Processing Completed'});
             refreshEvidenceUi(route);
             refreshEvidenceMetricsUi(route);
 
