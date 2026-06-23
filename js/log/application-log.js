@@ -18,6 +18,20 @@ export function logInfo(
     logEntry
 ) {
     logEntry.level = 'info';
+
+    if (logEntry.duration === true) {
+        if (logEntry.startTime === undefined) {
+            logEntry.startTime = performance.now();
+        } else {
+            const durationS =
+                (
+                    performance.now()
+                    - logEntry.startTime
+                ) / 1000;
+            logEntry.message += ` (Duration: ${durationS.toFixed(3)}s)`;
+        }
+    }
+
     log(logEntry);
     
     return logEntry;

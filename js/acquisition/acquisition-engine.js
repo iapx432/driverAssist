@@ -47,7 +47,10 @@ export async function processAcquisitionRequests(
                     request.startM
                 );
 
-                logInfo({message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)} Started`});
+                const logEntry = logInfo({
+                    duration: true, 
+                    message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)}`
+                });
 
                 const osm =
                     await getRoadInfo(
@@ -55,7 +58,8 @@ export async function processAcquisitionRequests(
                         point.lng
                     );
 
-                logInfo({message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)} Completed`});
+                // log the acquisition request finishing with the duration of the request
+                logInfo(logEntry);
 
                 const roads =
                     extractRoadInfo(

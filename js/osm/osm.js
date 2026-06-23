@@ -57,12 +57,10 @@ async function overpassRequest(
                 throw error;
             }
 
-            logInfo({message: 'Overpass rate limited'});
-
             const delayMs =
                 await getOverpassRetryDelayMs();
 
-            logInfo({message: `Retrying in ${delayMs / 1000}s`});
+            logInfo({message: `Overpass rate limited. Retrying in ${delayMs / 1000}s`});
 
             await new Promise(
                 resolve =>
@@ -71,10 +69,6 @@ async function overpassRequest(
                         delayMs
                     )
             );
-            
-            // await sleep(
-            //     delayMs
-            // );
         }
     }
 }

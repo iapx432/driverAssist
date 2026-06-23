@@ -56,7 +56,10 @@ from './inference/steep-road-inference-node.js';
 import { runInference }
 from './inference/inference-engine.js';
 
-import { formatJourneyDistance }
+import { 
+    formatJourneyDistance,
+    formatLatitudeLongitude
+} 
 from './utils/format.js';
 
 import { processAcquisitionRequests }
@@ -153,10 +156,13 @@ document
         }
 
         try {
-            // route request
-            logInfo({message: 'Route request from Open Route Service API Started'});
+            // request route
+            let logEntry = logInfo({
+                duration: true, 
+                message: `Request: environment.map.route from ${formatLatitudeLongitude(start.lat, start.lng)} to ${formatLatitudeLongitude(end.lat, end.lng)}`
+            });
             const geojson = await getRoute(start, end);
-            logInfo({message: 'Route request from Open Route Service API Completed'});
+            logInfo(logEntry);
 
             drawRoute(map, geojson);
             route = createRouteModel(geojson);
@@ -164,9 +170,15 @@ document
             addSteepnessEvidence(route);
             runInference(route);
             refreshAcquisitionRequestsUi(route);
-            logInfo({message: 'Acquisition: Processing Started'});
+
+            // process acquisition requests
+            logEntry = logInfo({
+                duration: true, 
+                message: `Acquisition: Processing ${route.acquisitionRequests.length} requests`
+            });
             await processAcquisitionRequests(route);
-            logInfo({message: 'Acquisition: Processing Completed'});
+            logInfo(logEntry);
+
             refreshEvidenceUi(route);
             refreshEvidenceMetricsUi(route);
 
