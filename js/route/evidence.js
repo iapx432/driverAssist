@@ -1,16 +1,11 @@
 // evidence.js
 // A simple module to manage evidence related to a route.
 // This module provides functions to add evidence to a route, retrieve evidence based on distance or type, and specifically to add steepness evidence based on the route's coordinate data.
-// The addEvidence function adds a new piece of evidence to the route's evidence array.
-// The getEvidenceAtDistance function retrieves evidence that intersects with a specific distance along the route.
-// The getEvidenceIntersectingSpan function retrieves evidence that intersects with a specified distance range along the route.
-// The addSteepnessEvidence function analyzes the route's coordinate data to identify intervals of steepness and adds corresponding evidence entries to the route.
-// The getEvidenceByType and getEvidenceBySource functions allow filtering evidence based on type or source, respectively.
-// The getEvidenceTypes and getEvidenceSources functions return sorted lists of unique evidence types and sources present in the route's evidence array.
 
 import { getSteepnessIntervals }
 from './route-model.js';
 
+// adds a new piece of evidence to the route's evidence array.
 export function addEvidence(
     route,
     evidence
@@ -21,6 +16,7 @@ export function addEvidence(
     );
 }
 
+// retrieves evidence that intersects with a specific distance along the route.
 export function getEvidenceAtDistance(
     route,
     distanceM
@@ -33,6 +29,7 @@ export function getEvidenceAtDistance(
     );
 }
 
+// retrieves evidence that intersects with a specified distance range along the route.
 export function getEvidenceIntersectingSpan(
     route,
     startM,
@@ -45,6 +42,7 @@ export function getEvidenceIntersectingSpan(
     );
 }
 
+// analyzes the route's coordinate data to identify intervals of steepness and adds corresponding evidence entries to the route.
 export function addSteepnessEvidence(
     route
 ) {
@@ -81,6 +79,7 @@ export function addSteepnessEvidence(
     );
 }
 
+// allows filtering evidence based on type.
 export function getEvidenceByType(
     route,
     type
@@ -94,6 +93,7 @@ export function getEvidenceByType(
     );
 }
 
+// allows filtering evidence based on source.
 export function getEvidenceBySource(
     route,
     source
@@ -107,6 +107,7 @@ export function getEvidenceBySource(
     );
 }
 
+// returns a sorted list of unique evidence types present in the route's evidence array.
 export function getEvidenceTypes(
     route
 ) {
@@ -123,6 +124,8 @@ export function getEvidenceTypes(
 
     ].sort();
 }
+
+// returns a sorted list of unique evidence sources present in the route's evidence array.
 export function getEvidenceSources(
     route
 ) {

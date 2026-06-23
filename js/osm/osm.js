@@ -30,13 +30,14 @@ way(around:20,${lat},${lng})
 out tags;
 `;
 
-    return await overpassRequest(
+    const response = await overpassRequest(
         {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain'},
             body: query
         }
     );
+    return response;
 }
 
 async function overpassRequest(
@@ -46,10 +47,13 @@ async function overpassRequest(
     while (true) {
 
         try {
-            return await httpRequest(
+
+            const response = await httpRequest(
                 OVERPASS_URL,
                 query
             );
+
+            return response;
         }
         catch (error) {
             let statusDescription = ''; 
@@ -83,17 +87,25 @@ async function overpassRequest(
 }
 
 async function getOverpassRetryDelayMs() {
-    const response =
-        await fetch(
-            'https://overpass-api.de/api/status'
+
+    try {
+
+        const response =
+            await fetch(
+                'https://overpass-api.de/api/status'
+            );
+
+        const text =
+            await response.text();
+
+        return parseRetryDelayMs(
+            text
         );
-
-    const text =
-        await response.text();
-
-    console.log(text);
-
-    return parseRetryDelayMs(text);
+    }
+    catch {
+        logInfo({ message: 'Overpass status unavailable. Using fallback retry delay of 5s' });
+        return 5000;
+    }
 }
 
 function parseRetryDelayMs(

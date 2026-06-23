@@ -155,6 +155,9 @@ document
             return;
         }
 
+        const btnRoute = document.getElementById('btnRoute');
+        btnRoute.disabled = true;
+
         try {
             // request route
             let logEntry = logInfo({
@@ -164,21 +167,32 @@ document
             const geojson = await getRoute(start, end);
             logInfo(logEntry);
 
+            // draw route on map
             drawRoute(map, geojson);
+
+            // create route model from route geojson
             route = createRouteModel(geojson);
+
+            // add steepness inference nodes to the route model from the route's coordinate data and add corresponding evidence entries to the route.
             route.inferenceNodes.push(new SteepRoadInferenceNode());
             addSteepnessEvidence(route);
+
+            // run inference engine to process route evidence and update route model
             runInference(route);
+
+            // update side-bar UI with route acquisition requests
             refreshAcquisitionRequestsUi(route);
 
             // process acquisition requests
+            const plural = route.acquisitionRequests.length === 1 ? '' : 's';
             logEntry = logInfo({
                 duration: true, 
-                message: `Acquisition: Processing ${route.acquisitionRequests.length} requests`
+                message: `Acquisition: Process ${route.acquisitionRequests.length} request${plural}`
             });
             await processAcquisitionRequests(route);
             logInfo(logEntry);
 
+            // update side-bar UI with route evidence and metrics
             refreshEvidenceUi(route);
             refreshEvidenceMetricsUi(route);
 
@@ -194,6 +208,9 @@ document
         catch (err) {
             console.error(err);
             alert('Route request failed.');
+        }
+        finally {
+            btnRoute.disabled = false;
         }
     });
 

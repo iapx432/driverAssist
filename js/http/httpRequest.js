@@ -19,15 +19,20 @@ export async function httpRequest(
     options = {}
 ) {
 
-    const response =
-        await fetch(
-            url,
-            options
-        );
-
-    if (response.status !== HTTP_STATUS_OK) {
-        throw response;
+    try {
+        const response =
+            await fetch(
+                url,
+                options
+            );
+    
+        if (response.status !== HTTP_STATUS_OK) {
+            throw response;
+        }
+    
+        return response.json();
+    } catch (error) {
+        console.error('HTTP request failed:', error);
+        throw error;
     }
-
-    return await response.json();
 }
