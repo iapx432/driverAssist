@@ -5,7 +5,11 @@
 // The getRoadInfo function sends a query to the Overpass API to find roads (highways) within a 20-meter radius of the given latitude and longitude.
 // The extractRoadInfo function processes the response from the Overpass API to extract relevant information about the roads, such as the highway type, name, reference, number of lanes, incline, and maximum speed.
 
-import { httpRequest }
+import { 
+    httpRequest,
+    HTTP_STATUS_TOO_MANY_REQUESTS,
+    HTTP_STATUS_GATEWAY_TIMEOUT
+}
 from '../http/httpRequest.js';
 
 import { logInfo }
@@ -42,25 +46,30 @@ async function overpassRequest(
     while (true) {
 
         try {
-
             return await httpRequest(
                 OVERPASS_URL,
                 query
             );
-
         }
         catch (error) {
-
+            let statusDescription = ''; 
             if (
-                error.status !== 429
+                error.status === HTTP_STATUS_TOO_MANY_REQUESTS
             ) {
-                throw error;
+                statusDescription = 'rate limited: Too Many Requests';
+            } else {
+                if (
+                    error.status === HTTP_STATUS_GATEWAY_TIMEOUT
+                ) {
+                    statusDescription = 'request delayed: Gateway Timeout';
+                } else {
+                    throw error;
+                }
             }
+            
+            const delayMs = await getOverpassRetryDelayMs();
 
-            const delayMs =
-                await getOverpassRetryDelayMs();
-
-            logInfo({message: `Overpass rate limited. Retrying in ${delayMs / 1000}s`});
+            logInfo({message: `Overpass API ${statusDescription}. Retrying in ${delayMs / 1000}s`});
 
             await new Promise(
                 resolve =>
