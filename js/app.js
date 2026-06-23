@@ -137,12 +137,12 @@ document.addEventListener(
     }
 );
 
-logInfo({message: 'openmatrixproject Driver Assist application started.'});
+logInfo({message: 'openmatrixproject driverAssist started'});
 logInfo({message: ''});
 logInfo({message: 'Click on the map to select journey start point'});
 logInfo({message: 'Click on the map to select journey end point'});
 logInfo({message: 'Click [Calculate Route] button to request the route'});
-logInfo({message: 'Tick steepness tickbox to show coloured gradient segments on the route'});
+logInfo({message: 'Check the steepness tickbox to show coloured gradient segments on the route'});
 
 // route planner button click handler
 document

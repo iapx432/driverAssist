@@ -39,7 +39,7 @@ export async function processAcquisitionRequests(
             request.type
         ) {
 
-            case 'environment.map.road.probe':
+            case 'environment.map.road.features':
 
                 const point =
                 getCoordinateAtDistance(
@@ -49,7 +49,7 @@ export async function processAcquisitionRequests(
 
                 const logEntry = logInfo({
                     duration: true, 
-                    message: `Acquisition: environment.map.road.probe at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)}`
+                    message: `Acquisition: environment.map.road.features at ${formatJourneyDistance(request.startM, 1)} ${formatLatitudeLongitude(point.lat, point.lng)}`
                 });
 
                 const osm =
@@ -76,7 +76,7 @@ export async function processAcquisitionRequests(
                             'osm',
 
                         type:
-                            'environment.map.road.probe',
+                            'environment.map.road.features',
 
                         startM:
                             point.distanceM,

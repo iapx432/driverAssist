@@ -41,7 +41,7 @@ extends InferenceNode {
                 route.acquisitionRequests.push(
                     {
                         type:
-                            'environment.map.road.probe',
+                            'environment.map.road.features',
                         startM:
                             evidence.startM,
                         endM:
