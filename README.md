@@ -394,6 +394,19 @@ Car + Touring Caravan
 
 The user's capabilities and constraints are evidence.
 
+### Principle 32
+
+Each UI concept has one owner.
+
+For example:
+
+The map owns the cursor position.
+The geocoder owns the address.
+The route owns the distance.
+The inference engine owns the best current conclusions.
+The application workflow owns the engine state.
+Each segment of the status bar is owned by a single contributor
+
 ## Notes and Observations
 
 ### Information, Logging and Metrics 
