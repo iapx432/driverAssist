@@ -17,12 +17,13 @@ export function formatJourneyDistance(
 export function formatLatitudeLongitude(
     latitude,
     longitude,
-    precision = 5
+    precision = 5,
+    brackets = true
 ) {
-    return `[lat:${Number(
+    return `${brackets ? '[' : ''}lat:${Number(
         latitude
     ).toFixed(precision)}, lng:${Number(
         longitude
-    ).toFixed(precision)}]`;
+    ).toFixed(precision)}${brackets ? ']' : ''}`;
 }
 

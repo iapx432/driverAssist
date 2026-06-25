@@ -68,6 +68,12 @@ from './acquisition/acquisition-engine.js';
 import { logInfo }
 from './log/application-log.js';
 
+import { addMouseMoveListener }
+from './map/map.js';
+
+import { setStatusInferenceEngine }
+from './status-bar/status-bar.js';
+
 const map = createMap();
 
 // set defaults
@@ -144,6 +150,9 @@ logInfo({message: 'Click on the map to select journey end point'});
 logInfo({message: 'Click [Calculate Route] button to request the route'});
 logInfo({message: 'Check the steepness tickbox to show coloured gradient segments on the route'});
 
+// add mouse move listener to update status bar with latitude and longitude
+addMouseMoveListener(map);
+
 // route planner button click handler
 document
     .getElementById('btnRoute')
@@ -157,6 +166,7 @@ document
 
         const btnRoute = document.getElementById('btnRoute');
         btnRoute.disabled = true;
+        setStatusInferenceEngine('Running');
 
         try {
             // request route
@@ -211,6 +221,7 @@ document
         }
         finally {
             btnRoute.disabled = false;
+            setStatusInferenceEngine('Idle');
         }
     });
 

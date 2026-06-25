@@ -131,3 +131,12 @@ body {
 
     white-space: nowrap;
 }
+
+#statusBar > div:not(:last-child)::after {
+
+    content: " |";
+
+    margin-left: 0px;
+
+    color: #808080;
+}
