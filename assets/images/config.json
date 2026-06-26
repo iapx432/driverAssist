@@ -1,0 +1,28 @@
+{
+    "environment": {
+        "map": {
+            "route": [
+                    {
+                        "providerCode": "osm",
+                        "providerName": "Open Street Maps",
+                        "providerDescription": "Open Street Maps (OSM) is a collaborative project to create a free editable map of the world.",
+                        "request": "",
+                        "apiReferenceUrl": "",
+                        "registerApiKeyUrl": ""
+                    }
+                ],
+            "tile":
+                [
+    
+                ],
+            "geoCoding": { 
+                "forward": [
+
+                ],
+                "reverse": [
+
+                ]
+            }
+        }
+    }
+}
