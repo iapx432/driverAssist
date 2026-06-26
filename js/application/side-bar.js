@@ -1,6 +1,15 @@
 // side-bar.js
 
-export function refreshEvidenceUi(route) {
+import {
+    getEvidenceBySource,
+    getEvidenceByType,
+    getEvidenceTypes,
+    getEvidenceSources
+}
+from '../route/evidence.js';
+
+
+export function refreshShowUi(route) {
 
     const evidenceTypes =
         getEvidenceTypes(route);
@@ -49,7 +58,7 @@ export function refreshEvidenceUi(route) {
     });
 }
 
-export function refreshEvidenceMetricsUi(
+export function refreshEvidenceUi(
     route
 ) {
     const evidenceTypes = getEvidenceTypes(route);

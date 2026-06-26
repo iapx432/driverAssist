@@ -1,3 +1,5 @@
+// app.js
+
 import { createMap }
 from './map/map.js';
 

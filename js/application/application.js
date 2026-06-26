@@ -1,9 +1,88 @@
 // application.js
 
+import { createMap }
+from '../map/map.js';
+
+import {
+    initialiseRouteSelection,
+    getRoutePoints
+}
+from '../route/route-selection.js';
+
+// ors (open route service) data
+import { getRoute }
+from '../ors/ors.js';
+
+import { drawRoute }
+from '../route/route-layer.js';
+
+import {
+    createRouteModel,
+    getCoordinate,
+    getSteepnessSegment,
+    getCoordinateAtDistance,
+    distanceBetweenCoordinates
+}
+from '../route/route-model.js';
+
+import {
+    addEvidence,
+    addSteepnessEvidence,
+    getEvidenceIntersectingSpan,
+    getEvidenceBySource,
+    getEvidenceByType,
+    getEvidenceTypes,
+    getEvidenceSources
+}
+from '../route/evidence.js';
+
+import { getIntervalAtDistance}
+from '../route/route-inspector.js';
+
+// osm (open street map) data
 import { 
+    getRoadInfo,
+    extractRoadInfo
+}
+from '../osm/osm.js';
+
+import {
+    renderSteepnessEvidence,
+    clearSteepnessEvidence
+}
+from '../render/steepness-renderer.js';
+
+import { SteepRoadInferenceNode }
+from '../inference/steep-road-inference-node.js';
+
+import { runInference }
+from '../inference/inference-engine.js';
+
+import { 
+    formatJourneyDistance,
+    formatLatitudeLongitude
+} 
+from '../utils/format.js';
+
+import { processAcquisitionRequests }
+from '../acquisition/acquisition-engine.js';
+
+import { logInfo }
+from '../log/application-log.js';
+
+import { addMouseMoveListener }
+from '../map/map.js';
+
+import { 
+    setStatusInferenceEngine,
+    setStatusGuidance
+} from '../status-bar/status-bar.js';
+
+
+import { 
+    refreshShowUi,
     refreshEvidenceUi,
-    refreshEvidenceMetricsUi,
-    refreshAcquisitionRequestsUi 
+    refreshAcquisitionRequestsUi
 } from './side-bar.js';
 
 // set defaults
@@ -11,167 +90,193 @@ let route = null;
 let dragging = false;    
 
 
-// createMap();
+// initialise application
 
-    const map = createMap();
+// ------------------------------------------------------------------
+// initialiseApplication()
+// ------------------------------------------------------------------
 
-// initialiseRouteSelection();
+export function initialiseApplication() {
 
-    initialiseRouteSelection(map, setStatusGuidance);
+    // map
 
-// initialiseLogging();
+        // createMap();
 
-    logInfo({message: 'openmatrixproject driverAssist started'});
-    logInfo({message: ''});
-    logInfo({message: 'Click on the map to select journey start + end points, press [Find Route] button and tick steepness checkbox'});
+        const map = createMap();
 
-// initialiseStatusBar();
+    // route selection
 
-    setStatusGuidance('Click start point on map');
+        // initialiseRouteSelection();
 
-// initialiseMouseTracking();
+        initialiseRouteSelection(map, setStatusGuidance);
 
-    // add mouse move listener to update status bar with latitude and longitude
-    addMouseMoveListener(map);
+    // logging
 
-// initialiseWindowLayout();
+        // initialiseLogging();
 
-    // add log pane splitter drag functionality
-    const splitter =
-        document.getElementById(
-            'splitter'
-        );
+        logInfo({message: 'openmatrixproject driverAssist started'});
+        logInfo({message: ''});
+        logInfo({message: 'Click on the map to select journey start + end points, press [Find Route] button and tick steepness checkbox'});
 
-    const bottomPane =
-        document.getElementById(
-            'bottomPane'
-        );
+    // status bar
 
-    // set initial height of bottom pane from local storage or default to 150px
-    bottomPane.style.height =
-        localStorage.getItem(
-            'bottomPaneHeight'
-        ) ?? '150px';
+        // initialiseStatusBar();
 
-    splitter.addEventListener(
-        'mousedown',
-        () => {
-            dragging = true;
-        }    
-    );    
+        setStatusGuidance('Click start point on map');
 
-    document.addEventListener(
-        'mouseup',
-        () => {
-            dragging = false;
-        }    
-    );    
+    // mouse tracking
 
-    document.addEventListener(
-        'mousemove',
-        event => {
+        // initialiseMouseTracking();
 
-            if (!dragging) {
-                return;
-            }
+        // add mouse move listener to update status bar with latitude and longitude
+        addMouseMoveListener(map);
 
-            const newHeight =
-                Math.max(
-                    50,
-                    Math.min(
-                        800,
-                        window.innerHeight -
-                        event.clientY
-                    )
-                );
+    // window layout
 
-            // save new height to local storage
-            localStorage.setItem(
-                'bottomPaneHeight',
-                newHeight
+        // initialiseWindowLayout();
+
+        // add log pane splitter drag functionality
+        const splitter =
+            document.getElementById(
+                'splitter'
             );
 
-            bottomPane.style.height =
-                `${newHeight}px`;
-        }
-    );
+        const bottomPane =
+            document.getElementById(
+                'bottomPane'
+            );
 
-// registerApplicationEvents();
+        // set initial height of bottom pane from local storage or default to 150px
+        bottomPane.style.height =
+            localStorage.getItem(
+                'bottomPaneHeight'
+            ) ?? '150px';
 
-// route planner button click handler
+        splitter.addEventListener(
+            'mousedown',
+            () => {
+                dragging = true;
+            }    
+        );    
 
-    document
-        .getElementById('btnRoute')
-        .addEventListener('click', async () => {
-            const { start, end } = getRoutePoints();
+        document.addEventListener(
+            'mouseup',
+            () => {
+                dragging = false;
+            }    
+        );    
 
-            if (!start || !end) {
-                alert('Please click on journey start and end points.');
-                return;
+        document.addEventListener(
+            'mousemove',
+            event => {
+
+                if (!dragging) {
+                    return;
+                }
+
+                const newHeight =
+                    Math.max(
+                        50,
+                        Math.min(
+                            800,
+                            window.innerHeight -
+                            event.clientY
+                        )
+                    );
+
+                // save new height to local storage
+                localStorage.setItem(
+                    'bottomPaneHeight',
+                    newHeight
+                );
+
+                bottomPane.style.height =
+                    `${newHeight}px`;
             }
+        );
 
-            const btnRoute = document.getElementById('btnRoute');
-            btnRoute.disabled = true;
+    // application events
 
-            try {
-                // request route
-                let logEntry = logInfo({
-                    duration: true, 
-                    message: `Request: environment.map.route from ${formatLatitudeLongitude(start.lat, start.lng)} to ${formatLatitudeLongitude(end.lat, end.lng)}`
-                });
-                setStatusInferenceEngine('Routing');
-                setStatusGuidance('Finding Route...');
-                const geojson = await getRoute(start, end);
-                logInfo(logEntry);
+        // registerApplicationEvents();
 
-                // draw route on map
-                drawRoute(map, geojson);
+        // route planner button click handler
 
-                // create route model from route geojson
-                route = createRouteModel(geojson);
+        document
+            .getElementById('btnRoute')
+            .addEventListener('click', async () => {
+                const { start, end } = getRoutePoints();
 
-                // add steepness inference nodes to the route model from the route's coordinate data and add corresponding evidence entries to the route.
-                route.inferenceNodes.push(new SteepRoadInferenceNode());
-                addSteepnessEvidence(route);
+                // validate route request
+                if (!start || !end) {
+                    alert('Please click on journey start and end points.');
+                    return;
+                }
 
-                // run inference engine to process route evidence and update route model
-                setStatusInferenceEngine('Analysing');
-                setStatusGuidance('Acquiring Evidence...');
-                runInference(route);
+                const btnRoute = document.getElementById('btnRoute');
+                btnRoute.disabled = true;
 
-                // update side-bar UI with route acquisition requests
-                refreshAcquisitionRequestsUi(route);
+                try {
+                    // request route
+                    let logEntry = logInfo({
+                        duration: true, 
+                        message: `Request: environment.map.route from ${formatLatitudeLongitude(start.lat, start.lng)} to ${formatLatitudeLongitude(end.lat, end.lng)}`
+                    });
+                    setStatusInferenceEngine('Routing');
+                    setStatusGuidance('Finding Route...');
+                    const geojson = await getRoute(start, end);
+                    logInfo(logEntry);
 
-                // process acquisition requests
-                const plural = route.acquisitionRequests.length === 1 ? '' : 's';
-                logEntry = logInfo({
-                    duration: true, 
-                    message: `Acquisition: Process ${route.acquisitionRequests.length} request${plural}`
-                });
-                await processAcquisitionRequests(route);
-                logInfo(logEntry);
+                    // draw route on map
+                    drawRoute(map, geojson);
 
-                // update side-bar UI with route evidence and metrics
-                refreshEvidenceUi(route);
-                refreshEvidenceMetricsUi(route);
+                    // Build Route Model
+                    route = createRouteModel(geojson);
 
-                console.log(route);
+                    // add steepness inference nodes to the route model from the route's coordinate data and add corresponding evidence entries to the route.
+                    route.inferenceNodes.push(new SteepRoadInferenceNode());
+                    addSteepnessEvidence(route);
 
-                // console.table(
-                //     geojson.features[0]
-                //         .properties
-                //         .segments[0]
-                //         .steps
-                // );
-            }
-            catch (err) {
-                console.error(err);
-                alert('Route request failed.');
-            }
-            finally {
-                btnRoute.disabled = false;
-                setStatusInferenceEngine('Idle');
-                setStatusGuidance('Click on steepness checkbox then click of steep segment');
-            }
-        });
+                    // run inference
+                    setStatusInferenceEngine('Analysing');
+                    setStatusGuidance('Acquiring Evidence...');
+                    runInference(route);
 
+                    // update side-bar UI with route acquisition requests
+                    refreshAcquisitionRequestsUi(route);
+
+                    // acquire additional evidence
+                    const plural = route.acquisitionRequests.length === 1 ? '' : 's';
+                    logEntry = logInfo({
+                        duration: true, 
+                        message: `Acquisition: Process ${route.acquisitionRequests.length} request${plural}`
+                    });
+                    await processAcquisitionRequests(route);
+                    logInfo(logEntry);
+
+                    // refresh UI
+                    refreshShowUi(route);
+                    refreshEvidenceUi(route);
+
+                    console.log(route);
+
+                    // console.table(
+                    //     geojson.features[0]
+                    //         .properties
+                    //         .segments[0]
+                    //         .steps
+                    // );
+                }
+                catch (err) {
+                    console.error(err);
+                    alert('Route request failed.');
+                }
+                finally {
+                    btnRoute.disabled = false;
+                    setStatusInferenceEngine('Idle');
+                    setStatusGuidance('Click on steepness checkbox then click of steep segment');
+                }
+            });
+
+}
+
+initialiseApplication();
