@@ -7,3 +7,8 @@ export function setStatusInferenceEngine(message) {
     const statusInferenceEngine = document.getElementById('statusInferenceEngine');
     statusInferenceEngine.textContent = message;
 }
+
+export function setStatusGuidance(message) {
+    const statusGuidance = document.getElementById('statusGuidance');
+    statusGuidance.textContent = message;
+}

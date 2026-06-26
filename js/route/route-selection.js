@@ -10,7 +10,7 @@ let endMarker = null;
 let startPoint = null;
 let endPoint = null;
 
-export function initialiseRouteSelection(map) {
+export function initialiseRouteSelection(map, setStatusGuidance) {
 
     map.on('click', (e) => {
 
@@ -30,6 +30,7 @@ export function initialiseRouteSelection(map) {
                 'Journey Start'
             );
 
+            setStatusGuidance('Click end point on map');
             return;
         }
 
@@ -47,6 +48,7 @@ export function initialiseRouteSelection(map) {
                 'Journey End'
             );
 
+            setStatusGuidance('Press [Find Route] button to request the route or click on a new start point');
             return;
         }
 

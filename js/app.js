@@ -71,15 +71,18 @@ from './log/application-log.js';
 import { addMouseMoveListener }
 from './map/map.js';
 
-import { setStatusInferenceEngine }
-from './status-bar/status-bar.js';
+import { 
+    setStatusInferenceEngine,
+    setStatusGuidance
+} from './status-bar/status-bar.js';
 
 const map = createMap();
 
 // set defaults
 let route = null;
 
-initialiseRouteSelection(map);
+initialiseRouteSelection(map, setStatusGuidance);
+setStatusGuidance('Click start point on map');
 
 // add log pane splitter drag functionality
 const splitter =
@@ -145,10 +148,7 @@ document.addEventListener(
 
 logInfo({message: 'openmatrixproject driverAssist started'});
 logInfo({message: ''});
-logInfo({message: 'Click on the map to select journey start point'});
-logInfo({message: 'Click on the map to select journey end point'});
-logInfo({message: 'Click [Calculate Route] button to request the route'});
-logInfo({message: 'Check the steepness tickbox to show coloured gradient segments on the route'});
+logInfo({message: 'Click on the map to select journey start + end points, press [Find Route] button and tick steepness checkbox'});
 
 // add mouse move listener to update status bar with latitude and longitude
 addMouseMoveListener(map);
@@ -166,7 +166,6 @@ document
 
         const btnRoute = document.getElementById('btnRoute');
         btnRoute.disabled = true;
-        setStatusInferenceEngine('Running');
 
         try {
             // request route
@@ -174,6 +173,8 @@ document
                 duration: true, 
                 message: `Request: environment.map.route from ${formatLatitudeLongitude(start.lat, start.lng)} to ${formatLatitudeLongitude(end.lat, end.lng)}`
             });
+            setStatusInferenceEngine('Routing');
+            setStatusGuidance('Finding Route...');
             const geojson = await getRoute(start, end);
             logInfo(logEntry);
 
@@ -188,6 +189,8 @@ document
             addSteepnessEvidence(route);
 
             // run inference engine to process route evidence and update route model
+            setStatusInferenceEngine('Analysing');
+            setStatusGuidance('Acquiring Evidence...');
             runInference(route);
 
             // update side-bar UI with route acquisition requests
@@ -222,6 +225,7 @@ document
         finally {
             btnRoute.disabled = false;
             setStatusInferenceEngine('Idle');
+            setStatusGuidance('Click on steepness checkbox then click of steep segment');
         }
     });
 
