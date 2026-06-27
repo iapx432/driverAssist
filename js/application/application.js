@@ -39,6 +39,7 @@ function initialiseLogging() {
     logInfo({ message: 'Click on the map to select the journey start and end points.' });
     logInfo({ message: 'Press [Find Route].' });
     logInfo({ message: 'Tick the Steepness checkbox to display gradient colouring.' });
+    logInfo({ message: '' });
 }
 
 function initialiseStatusBar() {
