@@ -8,8 +8,13 @@ import {
 }
 from '../route/evidence.js';
 
+import {
+    renderSteepnessEvidence,
+    clearSteepnessEvidence
+}
+from '../render/steepness-renderer.js';
 
-export function refreshShowUi(route) {
+export function refreshShowPanel(map, route) {
 
     const evidenceTypes =
         getEvidenceTypes(route);

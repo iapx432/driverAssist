@@ -80,9 +80,9 @@ import {
 
 
 import { 
-    refreshShowUi,
+    refreshShowPanel,
     refreshEvidenceUi,
-    refreshAcquisitionRequestsUi
+    refreshAcquisitionRequestsUi,
 } from './side-bar.js';
 
 // set defaults
@@ -100,23 +100,19 @@ export function initialiseApplication() {
 
     // map
 
-        // createMap();
-
         const map = createMap();
 
     // route selection
-
-        // initialiseRouteSelection();
 
         initialiseRouteSelection(map, setStatusGuidance);
 
     // logging
 
-        // initialiseLogging();
+        initialiseLogging();
 
-        logInfo({message: 'openmatrixproject driverAssist started'});
-        logInfo({message: ''});
-        logInfo({message: 'Click on the map to select journey start + end points, press [Find Route] button and tick steepness checkbox'});
+        // logInfo({message: 'openmatrixproject driverAssist started'});
+        // logInfo({message: ''});
+        // logInfo({message: 'Click on the map to select journey start + end points, press [Find Route] button and tick steepness checkbox'});
 
     // status bar
 
@@ -254,8 +250,8 @@ export function initialiseApplication() {
                     logInfo(logEntry);
 
                     // refresh UI
-                    refreshShowUi(route);
                     refreshEvidenceUi(route);
+                    refreshShowPanel(map, route);
 
                     console.log(route);
 
@@ -279,4 +275,27 @@ export function initialiseApplication() {
 
 }
 
-initialiseApplication();
+function initialiseLogging() {
+
+    logInfo({
+        message:
+            'openmatrixproject driverAssist started.'
+    });
+
+    logInfo({
+        message: ''
+    });
+
+    logInfo({
+        message:
+            'Click on the map to select the journey start and end points.'
+    });
+    logInfo({
+        message:
+            'Press [Find Route].'
+    });
+    logInfo({
+        message:
+            'Tick the Steepness checkbox to display gradient colouring.'
+    });
+}
