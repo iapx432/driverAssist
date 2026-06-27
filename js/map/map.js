@@ -45,7 +45,10 @@ export function createMap() {
     return map;
 }
 
-export function addMouseMoveListener(map) {
+export function initialiseMouseTracking(map) {
+
+    // add mouse move listener to update status bar with latitude and longitude
+
     map.on(
         'mousemove',
         event => {
