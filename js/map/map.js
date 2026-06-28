@@ -11,7 +11,16 @@ from '../status-bar/status-bar.js';
 import { getAddressFromLatitudeLongitude } 
 from '../location-services/location-services.js'
 
+import { distanceBetween } 
+from '../geometry/geometry.js';
+
+// limit reverse geocode rate to stay within free quota
 let hoverTimeoutId = null;
+
+// only update if location moved
+let lastAnalysedPosition = null;
+
+const CURSOR_MOVE_DISTANCE_THRESHOLD = 5;
 
 export function createMap() {
 
@@ -68,6 +77,18 @@ export function initialiseMouseTracking(map) {
                         lng
                     } =
                         event.latlng;
+
+                    if (
+                        lastAnalysedPosition &&
+                        distanceBetween(
+                            lastAnalysedPosition,
+                            event.latlng
+                        ) < CURSOR_MOVE_DISTANCE_THRESHOLD
+                    ) {
+                        return;
+                    }
+
+                    lastAnalysedPosition = event.latlng;
 
                     const address = await getAddressFromLatitudeLongitude(lat, lng);
                     setStatusGuidance(address.display_name);
