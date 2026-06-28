@@ -9,7 +9,7 @@ import { setStatusCursor, setStatusGuidance }
 from '../status-bar/status-bar.js';
 
 import { getAddressFromLatitudeLongitude } 
-from '../locationIq/locationIq.js'
+from '../location-services/location-services.js'
 
 let hoverTimeoutId = null;
 
