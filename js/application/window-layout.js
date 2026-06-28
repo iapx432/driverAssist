@@ -10,10 +10,9 @@ export function initialiseWindowLayout() {
             'bottomPane'
         );
 
-    bottomPane.style.height =
-        localStorage.getItem(
-            'bottomPaneHeight'
-        ) ?? '150px';
+    const lsBottomPanelHeight = localStorage.getItem('bottomPaneHeight');
+
+    bottomPane.style.height = lsBottomPanelHeight ?? '150px';
 
     // add log pane splitter drag functionality
     const splitter =
@@ -56,7 +55,7 @@ export function initialiseWindowLayout() {
             // save new height to local storage
             localStorage.setItem(
                 'bottomPaneHeight',
-                newHeight
+                `${newHeight}px`
             );
 
             bottomPane.style.height =
