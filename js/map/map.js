@@ -5,8 +5,11 @@
 import { formatLatitudeLongitude } 
 from '../utils/format.js';
 
-import { setStatusCursor }
+import { setStatusCursor, setStatusGuidance }
 from '../status-bar/status-bar.js';
+
+import { getAddressFromLatitudeLongitude } 
+from '../locationIq/locationIq.js'
 
 let hoverTimeoutId = null;
 
@@ -53,23 +56,26 @@ export function initialiseMouseTracking(map) {
         'mousemove',
         event => {
 
-            // clearTimeout(
-            //     hoverTimeoutId
-            // );
+            clearTimeout(
+                hoverTimeoutId
+            );
 
-            // hoverTimeoutId = setTimeout(
-            //     () => {
+            hoverTimeoutId = setTimeout(
+                async () => {
 
-            //         const {
-            //             lat,
-            //             lng
-            //         } =
-            //             event.latlng;
+                    const {
+                        lat,
+                        lng
+                    } =
+                        event.latlng;
 
-            //         setStatusCursor(formatLatitudeLongitude(lat, lng, 5, false));
-            //     },
-            //     500
-            // );
+                    const address = await getAddressFromLatitudeLongitude(lat, lng);
+                    setStatusGuidance(address.display_name);
+                    console.log(address);
+                },
+                500
+            );
+
             const {
                 lat,
                 lng

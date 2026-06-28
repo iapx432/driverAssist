@@ -1,5 +1,11 @@
 // window-layout.js
 
+import { 
+    getSettingValue,
+    setSettingValue
+} 
+from "../settings/settings.js";
+
 let dragging = false;    
 
 export function initialiseWindowLayout() {
@@ -10,9 +16,7 @@ export function initialiseWindowLayout() {
             'bottomPane'
         );
 
-    const lsBottomPanelHeight = localStorage.getItem('bottomPaneHeight');
-
-    bottomPane.style.height = lsBottomPanelHeight ?? '150px';
+    bottomPane.style.height = getSettingValue('bottomPaneHeight') ?? '150px';
 
     // add log pane splitter drag functionality
     const splitter =
@@ -52,14 +56,11 @@ export function initialiseWindowLayout() {
                     )
                 );
 
-            // save new height to local storage
-            localStorage.setItem(
-                'bottomPaneHeight',
-                `${newHeight}px`
-            );
+            // save new height to settings
+            const newHeightHtml = setSettingValue ('bottomPaneHeight', `${newHeight}px`);
 
-            bottomPane.style.height =
-                `${newHeight}px`;
+            // update the bottom pane height
+            bottomPane.style.height = newHeightHtml;
         }
     );
 

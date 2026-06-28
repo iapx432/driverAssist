@@ -1,9 +1,6 @@
 // main.js
 
-// responsibilities:
-// - create application
-// - initialise application
-// - register event handlers
+// see license https://github.com/iapx432/driverAssist
 
 import {
     initialiseApplication
