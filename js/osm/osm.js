@@ -19,7 +19,8 @@ const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 
 export async function getRoadInfo(
     lat,
-    lng
+    lng,
+    enableLogging = true
 ) {
     const query = `
 [out:json][timeout:25];
@@ -35,13 +36,15 @@ out tags;
             method: 'POST',
             headers: { 'Content-Type': 'text/plain'},
             body: query
-        }
+        },
+        enableLogging
     );
     return response;
 }
 
 async function overpassRequest(
-    query
+    query,
+    enableLogging = true
 ) {
 
     while (true) {
@@ -71,9 +74,14 @@ async function overpassRequest(
                 }
             }
             
-            const delayMs = await getOverpassRetryDelayMs();
+            const delayMs = await getOverpassRetryDelayMs(enableLogging);
 
-            logInfo({message: `Overpass API ${statusDescription}. Retrying in ${delayMs / 1000}s`});
+            const logMessage = `Overpass API ${statusDescription}. Retrying in ${delayMs / 1000}s`;
+            if (enableLogging) {
+                logInfo({ message: logMessage });
+            } else {
+                console.warn(logMessage);
+            }
 
             await new Promise(
                 resolve =>
@@ -86,7 +94,7 @@ async function overpassRequest(
     }
 }
 
-async function getOverpassRetryDelayMs() {
+async function getOverpassRetryDelayMs(enableLogging = true) {
 
     try {
 
@@ -103,7 +111,12 @@ async function getOverpassRetryDelayMs() {
         );
     }
     catch {
-        logInfo({ message: 'Overpass status unavailable. Using fallback retry delay of 5s' });
+        const logMessage = 'Overpass status unavailable. Using fallback retry delay of 5s';
+        if (enableLogging) {
+            logInfo({ message: logMessage });
+        } else {
+            console.warn(logMessage);
+        }
         return 5000;
     }
 }

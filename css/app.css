@@ -140,3 +140,11 @@ body {
 
     color: #808080;
 }
+
+.gps-crosshair {
+    color: #0080ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 16px;
+}

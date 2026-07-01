@@ -38,3 +38,24 @@ export async function getAddressFromLatitudeLongitude(
         throw error;
     }
 }
+
+// from browser geolocation API
+export async function getCurrentPosition() {
+
+    return new Promise(
+
+        (resolve, reject) => {
+
+            navigator.geolocation.getCurrentPosition(
+                resolve,
+                reject,
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
+    );
+}

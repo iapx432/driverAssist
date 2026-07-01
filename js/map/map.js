@@ -57,7 +57,7 @@ export function createMap() {
     return map;
 }
 
-export function initialiseMouseTracking(map) {
+export function initialiseMouseTracking(map, notification) {
 
     // add mouse move listener to update status bar with latitude and longitude
 
@@ -89,10 +89,9 @@ export function initialiseMouseTracking(map) {
                     }
 
                     lastAnalysedPosition = event.latlng;
-
-                    const address = await getAddressFromLatitudeLongitude(lat, lng);
-                    setStatusGuidance(address.display_name);
-                    console.log(address);
+                    
+                    // call the notification function with the current latitude and longitude
+                    notification(lat, lng);
                 },
                 500
             );
@@ -106,4 +105,40 @@ export function initialiseMouseTracking(map) {
             setStatusCursor(formatLatitudeLongitude(lat, lng, 5, false));
         }
     );    
+}
+
+export function showCurrentLocationOnMap(
+    map,
+    position
+) {
+
+    L.circle(
+
+        [
+            position.coords.latitude,
+            position.coords.longitude
+        ],
+
+        {
+            radius:
+                position.coords.accuracy,
+
+            color: '#0080ff',
+
+            weight: 2,
+
+            fillColor: '#0080ff',
+
+            fillOpacity: 0.15
+        }
+
+    ).addTo(map);
+
+    L.marker([position.coords.latitude, position.coords.longitude], {
+        icon: L.divIcon({
+            className: 'gps-crosshair',
+            html: '+',
+            iconSize: [16, 16]
+        })
+    }).addTo(map);
 }

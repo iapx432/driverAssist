@@ -26,6 +26,28 @@ from '../utils/format.js';
 // this is a brittle imlementation, later requests will be sent to the domain handlers they are intended for, rather than being processed here in the acquisition engine. This is a temporary solution to get the acquisition engine working with the current code structure.
 // the domain handlers will decide how to fulful the requests and choose sources according to policies they implement.
 
+export const providers = [
+    {
+        "id": "openStreetMap",
+        "name": "OpenStreetMap",
+        "requiresApiKey": false
+    },
+    {
+        "id": "ors",
+        "name": "OpenRouteService",
+        "requiresApiKey": true,
+        "registrationUrl": "https://api.openrouteservice.org/",
+        "test": "testOrsConnection"
+    },
+    {
+        "id": "locationIq",
+        "name": "LocationIQ",
+        "requiresApiKey": true,
+        "registrationUrl": "https://my.locationiq.com/register",
+        "test": "testLocationIqConnection"
+    }
+];
+
 export async function processAcquisitionRequests(
     route
 ) {
