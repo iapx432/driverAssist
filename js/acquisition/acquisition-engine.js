@@ -28,7 +28,7 @@ from '../utils/format.js';
 
 export const providers = [
     {
-        "id": "openStreetMap",
+        "id": "osm",
         "name": "OpenStreetMap",
         "requiresApiKey": false
     },
