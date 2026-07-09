@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    
+    <meta name="application-name" content="Driver Assist">
+    <meta name="description" content="Driver Assist - evidence-based driver decision support using OpenStreetMap and OpenRouteService">
     <title>Driver Assist</title>
 
     <!-- Leaflet CSS -->
@@ -38,22 +40,6 @@
 
                 </div>
 
-                <details id="apiKeyPanel" open>
-
-                    <summary>
-                        API Key
-                    </summary>
-
-                    <div id="apiKeyContent">
-                        <input
-                            type="text"
-                            id="apiKeyInput"
-                            placeholder="Enter your API key here"
-                        />
-                    </div>
-
-                </details>
-
                 <details open>
                     <summary>Route</summary>
 
@@ -76,20 +62,13 @@
 
                 </details>
 
-                <details
-                    id="acquisitionRequestsPanel"
-                    open
-                >
+                <details id="acquisitionRequestsPanel" open>
 
-                    <summary
-                        id="acquisitionRequestsSummary"
-                    >
+                    <summary id="acquisitionRequestsSummary">
                         Acquisition Requests
                     </summary>
 
-                    <div
-                        id="acquisitionRequestsContent"
-                    >
+                    <div id="acquisitionRequestsContent">
                     </div>
 
                 </details>
@@ -107,7 +86,15 @@
 
             </aside>
 
-            <main id="map"></main>
+            <main id="workspace">
+
+                <div id="startupScreen">
+                </div>
+
+                <div id="map">
+                </div>
+
+            </main>
 
         </div>
 

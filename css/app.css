@@ -148,3 +148,20 @@ body {
     text-align: center;
     line-height: 16px;
 }
+
+#workspace {
+    position: relative;
+    flex: 1;
+}
+
+#startupScreen {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    display: none;
+}

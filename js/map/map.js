@@ -5,11 +5,8 @@
 import { formatLatitudeLongitude } 
 from '../utils/format.js';
 
-import { setStatusCursor, setStatusGuidance }
+import { setStatusCursor }
 from '../status-bar/status-bar.js';
-
-import { getAddressFromLatitudeLongitude } 
-from '../location-services/location-services.js'
 
 import { distanceBetween } 
 from '../geometry/geometry.js';

@@ -1,7 +1,7 @@
 // locationIq.js
 
 // A simple module to convert a [lat, lng] into a street address.
-// Note: You need to set your LOCATIONIQ_GEOCODE_URL in the config.js file for this to work.
+// Note: You need to set your LOCATIONIQ_API_KEY in the config.js file for this to work.
 
 import { LOCATIONIQ_API_KEY }
 from '../config.js';
@@ -9,20 +9,24 @@ from '../config.js';
 import { httpRequest}
 from '../http/httpRequest.js';
 
-const LOCATIONIQ_GEOCODE_URL = `https://us1.locationiq.com/v1/reverse`
+import {
+    getEffectiveProvider
+}
+from '../providers/provider-definitions.js';
 
 export async function getAddressFromLatitudeLongitude(
     lat,
     lng
 ) {
     try {
+        const provider = getEffectiveProvider("locationIq");
 
         const url =
-            `${LOCATIONIQ_GEOCODE_URL}` +
-            `?key=${LOCATIONIQ_API_KEY}` +
+            `${provider.apiUrl}` +
+            `?key=${provider.apiKey}` +
             `&lat=${lat}` +
             `&lon=${lng}` +
-            `&format=json`;        
+            `&format=json`;
 
         const response =  await httpRequest(
             url,
@@ -34,6 +38,11 @@ export async function getAddressFromLatitudeLongitude(
         return response;
 
     } catch (error) {
+
+        if (error.status === 404) {
+            return null;        // no address available
+        }
+
         console.error('Error fetching AddressFromLatitudeLongitude:', error);
         throw error;
     }
@@ -58,4 +67,40 @@ export async function getCurrentPosition() {
             );
         }
     );
+}
+export async function testProviderConnection() {
+
+    try {
+        const provider = getEffectiveProvider("locationIq");
+
+        const url =
+            `${provider.apiUrl}` +
+            `?key=${provider.apiKey}` +
+            `&lat=51.507595` +          // Tate Modern London
+            `&lon=-0.099523` +
+            `&format=json`;
+
+        await httpRequest(
+            url,
+            {
+                method: 'GET'
+            }
+        );
+
+        return {
+            success: true,
+            status: 200,
+            message: 'Connected',
+            details: null
+        };
+    }
+    catch (error) {
+
+        return {
+            success: false,
+            status: error.status ?? null,
+            message: error.message,
+            details: null
+        };
+    }
 }

@@ -4,6 +4,8 @@
 
 ![Screenshot](assets/images/Screenshot1.png "Early Dev Version")
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iapx432/driverAssist)
+
 ## Usage
 
 Create a file: `js/config.js` which contains:

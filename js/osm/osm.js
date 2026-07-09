@@ -168,3 +168,44 @@ export function extractRoadInfo(
 
     return roads;
 }
+
+export async function testProviderConnection() {
+
+    try {
+        const response =
+            await fetch(
+                'https://overpass-api.de/api/status',
+                {
+                    method: 'GET',
+                    cache: 'no-cache'
+                }
+            );
+
+        if (!response.ok) {
+            return {
+                success: false,
+                status: response.status,
+                message: `HTTP ${response.status}`
+            };
+        }
+
+        const status = await response.text();
+
+        return {
+            success: true,
+            status: response.status,
+            message: 'Connected',
+            details: status
+        };
+
+    }
+    catch (error) {
+
+        return {
+            success: false,
+            status: null,
+            message: error.message,
+            details: null
+        };
+    }
+}
