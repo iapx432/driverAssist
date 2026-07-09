@@ -3,9 +3,6 @@
 // A simple module to convert a [lat, lng] into a street address.
 // Note: You need to set your LOCATIONIQ_API_KEY in the config.js file for this to work.
 
-import { LOCATIONIQ_API_KEY }
-from '../config.js';
-
 import { httpRequest}
 from '../http/httpRequest.js';
 

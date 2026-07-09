@@ -3,8 +3,6 @@
 // This module provides a function to get a route between two points, including elevation and steepness data.
 // Note: You need to set your ORS API key in the config.js file for this to work.
 
-import { ORS_API_KEY }
-from '../config.js';
 import { getEffectiveProvider } from '../providers/provider-definitions.js';
 
 import { httpRequest}
