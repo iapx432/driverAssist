@@ -8,13 +8,7 @@
 
 ## Usage
 
-Create a file: `js/config.js` which contains:
-
-`export const ORS_API_KEY = '.....';`
-
-Get your free api key from Open Route Service API web site.
-
-https://api.openrouteservice.org/
+Enter the api keys into the start-up screen and refresh
 
 ## Project Objective
 
