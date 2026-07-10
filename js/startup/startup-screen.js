@@ -97,6 +97,15 @@ export function renderProvider(
             const getApiKeyButton = document.createElement("button");
             getApiKeyButton.textContent = "Get API Key";
             getApiKeyButton.id = `provider-getApiKey-${provider.id}`;
+            getApiKeyButton.addEventListener(
+                "click",
+                () => {
+                    window.open(
+                        provider.registrationUrl,
+                        "_blank"
+                    );
+                }
+            );
             getApiKeyDiv.appendChild(getApiKeyButton);
             
             card.appendChild(getApiKeyDiv);
