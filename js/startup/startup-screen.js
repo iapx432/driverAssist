@@ -95,7 +95,7 @@ export function renderProvider(
             getApiKeyDiv.appendChild(getApiKeyLabel);
             
             const getApiKeyButton = document.createElement("button");
-            getApiKeyButton.textContent = "Get API Key";
+            getApiKeyButton.textContent = "Register";
             getApiKeyButton.id = `provider-getApiKey-${provider.id}`;
             getApiKeyButton.addEventListener(
                 "click",
