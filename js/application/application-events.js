@@ -16,7 +16,7 @@ import {
 } from '../status-bar/status-bar.js';
 
 import { getRoute }
-from '../ors/ors.js';
+from '../acquisition/providers/ors/ors.js';
 
 import { drawRoute }
 from '../route/route-layer.js';

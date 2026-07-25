@@ -16,7 +16,8 @@ export const HTTP_STATUS_GATEWAY_TIMEOUT = 504;
 
 export async function httpRequest(
     url,
-    options = {}
+    options = {},
+    raw = false
 ) {
 
     try {
@@ -28,7 +29,7 @@ export async function httpRequest(
             throw error;            
         }
     
-        return response.json();
+        return raw ? response : response.json();
     } catch (error) {
         console.error('HTTP request failed:', error);
         throw error;

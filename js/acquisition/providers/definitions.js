@@ -1,16 +1,19 @@
 import { testProviderConnection as testOsmConnection }
-from '../osm/osm.js';
+from './osm/osm.js';
 
 import { testProviderConnection as testOrsConnection }
-from '../ors/ors.js';
+from './ors/ors.js';
 
 import { testProviderConnection as testLocationIqConnection }
-from '../location-services/location-services.js';
+from './locationIq/locationIq.js';
+
+import { testProviderConnection as testMapTilerConnection }
+from './maptiler/maptiler.js';
 
 import {
     getProviderApiKey
 }
-from '../settings/settings.js';
+from '../../settings/settings.js';
 
 export const providers = [
     {
@@ -113,6 +116,29 @@ export const providers = [
             }
         ],
         "displayOrder": 2
+    },
+    {
+        "id": "maptiler",
+        "name": "MapTiler",
+        "description": "MapTiler provides map tools, APIs and data tiles.",
+        "documentation": [
+            {
+                "wiki": "https://docs.maptiler.com"
+            }
+        ],
+        "apiUrl": "https://api.maptiler.com/tiles/v4",
+        "apiKey": "",
+        "requireAtStartup": true,
+        "connectionTestFunction": testMapTilerConnection,
+        "requiresApiKey": true,
+        "registrationUrl": "https://cloud.maptiler.com",
+        "websites": [
+            {
+                "description": "Main MapTiler website",
+                "url": "https://www.maptiler.com/"
+            }
+        ],
+        "displayOrder": 3
     }
 ];
 

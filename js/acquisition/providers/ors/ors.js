@@ -1,15 +1,10 @@
 // ors.js
 // A simple module to interact with the Open Route Service API to get route data.
 // This module provides a function to get a route between two points, including elevation and steepness data.
-// Note: You need to set your ORS API key in the config.js file for this to work.
 
-import { getEffectiveProvider } from '../providers/provider-definitions.js';
+import { getEffectiveProvider } from '../../providers/definitions.js';
 
-import { httpRequest}
-from '../http/httpRequest.js';
-
-const ORS_ROUTE_URL =
-    'https://api.openrouteservice.org/v2/directions/driving-car/geojson';
+import { httpRequest} from '../../../http/httpRequest.js';
 
 export async function getRoute(
     start,

@@ -1,15 +1,14 @@
 // locationIq.js
 
 // A simple module to convert a [lat, lng] into a street address.
-// Note: You need to set your LOCATIONIQ_API_KEY in the config.js file for this to work.
 
 import { httpRequest}
-from '../http/httpRequest.js';
+from '../../../http/httpRequest.js';
 
 import {
     getEffectiveProvider
 }
-from '../providers/provider-definitions.js';
+from '../../providers/definitions.js';
 
 export async function getAddressFromLatitudeLongitude(
     lat,

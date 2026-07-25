@@ -10,10 +10,10 @@ import {
     HTTP_STATUS_TOO_MANY_REQUESTS,
     HTTP_STATUS_GATEWAY_TIMEOUT
 }
-from '../http/httpRequest.js';
+from '../../../http/httpRequest.js';
 
 import { logInfo }
-from '../log/application-log.js';
+from '../../../log/application-log.js';
 
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 

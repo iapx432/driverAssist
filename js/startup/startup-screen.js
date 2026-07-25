@@ -1,6 +1,6 @@
 
 import { providers }
-from '../providers/provider-definitions.js';
+from '../acquisition/providers/definitions.js';
 
 import { 
     getProviderApiKey,

@@ -28,7 +28,7 @@ import {
     getCurrentPosition,
     getAddressFromLatitudeLongitude
  } 
-from '../location-services/location-services.js';
+from '../acquisition/providers/locationIq/locationIq.js';
 
 import { formatLatitudeLongitude } 
 from '../utils/format.js';
@@ -37,13 +37,13 @@ import {
     getRoadInfo,
     extractRoadInfo
 }
-from '../osm/osm.js';
+from '../acquisition/providers/osm/osm.js';
 
 import { showCurrentLocationOnMap }
 from '../map/map.js';
 
 import { testProviderConnections }
-from '../providers/provider-definitions.js';
+from '../acquisition/providers/definitions.js';
 
 import { showStartupScreen, hideStartupScreen, updateProviderStatus }
 from '../startup/startup-screen.js';

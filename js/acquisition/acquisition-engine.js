@@ -7,7 +7,7 @@ import {
     getRoadInfo,
     extractRoadInfo
 }
-from '../osm/osm.js';
+from './providers/osm/osm.js';
 
 import {
     addEvidence

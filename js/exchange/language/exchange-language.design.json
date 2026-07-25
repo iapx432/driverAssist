@@ -1,0 +1,198 @@
+{
+    "version": "0.1",
+
+    "primitives": {
+
+        "String": {},
+        
+        "Collection": {}
+
+     },
+
+    "types": {
+
+        "Set": {
+            "id": "set",
+            "description": "A named collection of items.",
+            "properties": {
+                "name": {
+                    "type": "String"
+                },
+                "items": {
+                    "type": "Collection"
+                }
+            },
+            "annotations": { }
+        }
+
+    },
+
+    "concepts": {
+
+        "Feature": {
+            "description": "A spatially located object."
+        },
+
+        "Property": {
+            "description": "A property value associated with a Feature."
+        },
+
+        "PropertyValue": {
+            "description": "A property value associated with a Feature."
+        },
+
+        "Route": {
+            "description": "A route associated with a journey."
+        },
+
+        "Weather": {
+            "description": "Weather information associated with a location or RegionSet."
+        },
+
+        "RegionSet": {
+            "description": "A set of spatial regions."
+        },
+
+        "Traffic": {
+            "description": "Traffic information associated with a location or RegionSet."
+        },
+
+        "Price": {
+            "description": "Price information associated with a Feature capability."
+        }
+
+    },
+
+    "bases": {
+
+        "Spatial": {
+            "description": "Associativity on the basis of spatial location / reference / RegionSet."
+        },
+
+        "Connectivity": {
+            "description": "Associativity on the basis of journey connectivity."
+        },
+
+        "Temporal": {
+            "description": "Associativity on the basis of temporal aspects."
+        }
+
+    },
+
+    "operations": {
+
+        "avoid": {
+            "description": "Indicates avoidance or exclusion.",
+            "bases": [
+                "Spatial", 
+                "Connectivity", 
+                "Temporal"
+            ]
+        },
+
+        "detour": {
+            "description": "Indicates navigate around within constraints.",
+            "bases": [ 
+                "Connectivity"
+            ]
+        },
+
+        "intersect": {
+            "description": "Indicates intersection or shared elements.",
+            "bases": [
+                "Spatial", 
+                "Connectivity", 
+                "Temporal"
+            ]
+        },
+
+        "union": {
+            "description": "Indicates the union of elements.",
+            "bases": [
+                "Spatial", 
+                "Connectivity", 
+                "Temporal"
+            ]
+        },
+
+        "difference": {
+            "description": "Indicates the difference (delta) of elements."
+        }
+
+     },
+
+    "relationships": {
+
+        "contains": {
+            "description": "Indicates ownership or containment."
+        },
+
+        "locatedBy": {
+            "description": "Associates an object with its spatial representation."
+        }
+
+    },
+
+    "links": {
+
+        "feature.contains.propertyValue": {
+            "from": "Feature",
+            "relationship": "contains",
+            "to": "PropertyValue"
+        }
+
+    },
+
+    "requests": {
+
+        "Set.Get": {
+            "id": "set.get",
+            "description": "Retrieves a Set.",
+            "properties": {
+                "name": {
+                    "type": "String",
+                    "description": "The name of the Set to retrieve."
+                }
+            },
+            "response": {
+                "type": "Set"
+            },
+            "annotations": [
+                "example: { \"request\": \"set.get\", \"name\": \"property\" }"
+            ]
+        }
+    },
+
+    "responses": {
+
+        "Set.Get": {
+            "id": "set.get",
+            "description": "The response to a Set.Get request.",
+            "properties": {
+                "request": {
+                    "type": "Set.Get",
+                    "description": "The request that generated this response."
+                },
+                "result": {
+                    "type": "Set",
+                    "description": "The Set that was retrieved."
+                },
+                "metadata": {
+                    "type": "Collection",
+                    "description": "Metadata about the response."
+                },
+                "messages": {
+                    "type": "Collection",
+                    "description": "Messages about the response."
+                },
+                "diagnostics": {
+                    "type": "Collection",
+                    "description": "Diagnostics about the response."
+                }
+            },
+            "annotations": [
+                "example: { \"request\": { \"request\": \"set.get\", \"name\": \"property\" }, \"result\": { \"name\": \"property\", \"items\": [\"item1\", \"item2\"] }, \"metadata\": {}, \"messages\": [], \"diagnostics\": [] }"
+            ]
+        }
+    }
+}

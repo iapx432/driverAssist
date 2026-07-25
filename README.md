@@ -36,6 +36,15 @@ Live Journey Guidance
 
 using the same architecture.
 
+## DriverAssist Architecture
+
+DriverAssist is composed of two complementary arcs:
+
+*Acquisition* — enriches the Catalogue (the current known state of the universe).
+Interrogation — answers questions about the Catalogue through the Information Exchange Protocol (IEP).
+
+*The Exchange Definition Language (EDL)* is the authoritative definition of the language spoken by the Information Exchange Protocol. The implementation conforms to the EDL; it does not define it.
+
 ## Development Methodology
 
 ### Principle 1
