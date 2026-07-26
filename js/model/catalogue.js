@@ -13,6 +13,19 @@ export class Catalogue {
     #properties = new Map();
 
     /**
+     * Returns all available set names.
+     *
+     * @returns {string[]}
+     */
+    setNames() {
+        return [
+            "feature",
+            "property",
+            "propertyValue",
+        ];
+    }
+
+    /**
      * Registers a feature.
      *
      * @param {Feature} feature

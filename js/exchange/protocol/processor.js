@@ -4,6 +4,7 @@ import { Request } from "./request.js";
 import { Response } from "./response.js";
 import { ExecutionContext } from "./execution-context.js";
 import { SetGetOperation } from "./operation/set.get.js";
+import { SetListOperation } from "./operation/set.list.js";
 
 export class ExchangeProcessor {
     #catalogue;
@@ -53,6 +54,10 @@ export class ExchangeProcessor {
                     case "set.get":
                         const setGetOperation = new SetGetOperation(this.#catalogue, this.#exchangeLanguage);
                         setGetOperation.execute(executionContext);
+                        break;
+                    case "set.list":
+                        const setListOperation = new SetListOperation(this.#catalogue, this.#exchangeLanguage);
+                        setListOperation.execute(executionContext);
                         break;
                     default:
                         response.messages.push(`Request not implemented: ${executionContext.requestDefinition.id}`);

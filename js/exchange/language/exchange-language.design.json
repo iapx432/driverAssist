@@ -160,7 +160,20 @@
             "annotations": [
                 "example: { \"request\": \"set.get\", \"name\": \"property\" }"
             ]
+        },
+
+        "Set.List": {
+            "id": "set.list",
+            "description": "Retrieves a list of available sets.",
+            "properties": {},
+            "response": {
+                "type": "Collection"
+            },
+            "annotations": [
+                "example: { \"request\": \"set.list\" }"
+            ]
         }
+
     },
 
     "responses": {
