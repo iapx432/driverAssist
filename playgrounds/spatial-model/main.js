@@ -2,11 +2,7 @@ import { MapTilerVectorTileProvider } from "../../js/acquisition/providers/mapti
 import { getEffectiveProvider }from '../../js/acquisition/providers/definitions.js';
 
 import { Request } from "../../js/exchange/protocol/request.js";
-import { Response } from "../../js/exchange/protocol/response.js";
 import exchangeLanguage from "../../js/exchange/language/exchange-language.design.json" with { type: "json" };
-
-const btnRun = document.getElementById("btnRun");
-const output = document.getElementById("output");
 
 import { Catalogue } from "../../js/model/catalogue.js";
 import { ExchangeProcessor } from "../../js/exchange/protocol/processor.js"
@@ -29,12 +25,12 @@ mapTileProvider.initialise(map, mapTilerProviderDefinition.id);
 
 setTimeout(() => {
     // const featureLayerNames = mapTileProvider.acquireVisibleFeatureLayerNames();
-    console.log({
-        viewZoom: map.getZoom(),
-        layerNames: mapTileProvider.acquireVisibleFeatureLayerNames(),
-        layerProperties: mapTileProvider.acquireVisibleFeaturePropertyUsage(),
-        providerZoom: mapTileProvider.getZoomLevel()
-    });
+    // console.log({
+    //     viewZoom: map.getZoom(),
+    //     layerNames: mapTileProvider.acquireVisibleFeatureLayerNames(),
+    //     layerProperties: mapTileProvider.acquireVisibleFeaturePropertyUsage(),
+    //     providerZoom: mapTileProvider.getZoomLevel()
+    // });
 
     // populate the catalogue
     const catalogue = new Catalogue();
@@ -54,4 +50,4 @@ setTimeout(() => {
     const response = exchangeProcessor.execute(request);
 
     console.log(response);
-}, 3000);
+}, 1000);
