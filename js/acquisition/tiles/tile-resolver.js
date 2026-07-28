@@ -1,11 +1,11 @@
-import { PointToTileId } from '../../spatial/transforms/point-to-tile-id.js';
+import { PointToTileIdTransformer } from '../../spatial/transforms/point-to-tile-id.js';
 
 export class TileResolver {
 
     #pointToTileIdTransformer = null;
 
     constructor() {
-        this.#pointToTileIdTransformer = new PointToTileId();
+        this.#pointToTileIdTransformer = new PointToTileIdTransformer();
     }
 
     resolve(spatialReference, policy) {

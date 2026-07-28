@@ -1,6 +1,6 @@
 import { TileId } from "../../acquisition/tiles/tile-id.js";
 
-export class PointToTileId {
+export class PointToTileIdTransformer {
 
     from = "Point";
 
