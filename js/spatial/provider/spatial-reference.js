@@ -9,8 +9,11 @@
  *   - Latitude / longitude
  *   - Route geometry
  *   - Weather grid cell
+ * 
+ * @dal_entityType ProviderSpatialReference
+ * 
  */
-export class SpatialReference {
+export class ProviderSpatialReference {
 
     /**
      * Provenance.

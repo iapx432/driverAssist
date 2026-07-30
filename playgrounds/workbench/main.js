@@ -45,6 +45,10 @@ setTimeout(() => {
     const tileResolver = new TileResolver();
     const tilingPolicy = new TilingPolicy();
     const tileIds = tileResolver.resolve(feature.spatialReference, tilingPolicy);
-    console.log(tileIds);
-
+    console.log({
+        catalogue: catalogue,
+        feature: feature,
+        tileIds: tileIds
+    });
+    
 }, 1000);

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Get Road Names from MapTiler</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+<style>
+  body { margin: 0; }
+  #map { width: 100%; height: 100vh; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+const map = new maplibregl.Map({
+    container: 'map',
+    style: `https://api.maptiler.com/maps/streets/style.json?key=API_KEY`,
+    center: [-0.1276, 51.5072], // London
+    zoom: 14
+});
+
+
+// map.on('load', () => {
+//   const layerNames = map.getStyle().layers.map(layer => layer.id);
+//   console.log(layerNames);
+// });
+
+// Listen for clicks to get road name
+map.on('click', (e) => {
+    let features = map.queryRenderedFeatures(e.point);
+    console.log('Clicked features:', features);
+    features = map.queryRenderedFeatures(e.point, {
+        layers: ['road_label'] // Road layer
+    });
+    if (features.length > 0) {
+        const roadName = features[0].properties.name || 'Unnamed road';
+        alert(`Road name: ${roadName}`);
+    } else {
+        alert('No road found here.');
+    }
+});
+</script>
+</body>
+</html>

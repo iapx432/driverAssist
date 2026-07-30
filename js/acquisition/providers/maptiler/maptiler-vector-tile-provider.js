@@ -2,8 +2,12 @@ import { Catalogue } from "../../../model/catalogue.js";
 import { Feature } from "../../../model/feature.js";
 import { Property } from "../../../model/property.js";
 import { PropertyValue } from "../../../model/property-value.js";
-import { SpatialReference } from "../../../model/spatial-reference.js";
+import { ProviderSpatialReference } from "../../../spatial/provider/spatial-reference.js";
 import { getEffectiveProvider } from "../definitions.js";
+
+/**
+ * @dal_entityType Provider
+ */
 
 export class MapTilerVectorTileProvider {
     constructor() {
@@ -39,15 +43,15 @@ export class MapTilerVectorTileProvider {
                     },
                     maxNativeZoom: 15,
                     vectorTileLayerStyles: {
-                        road: {
-                            color: "red",
-                            weight: 2
-                        },
+                        road: [],
                         building: [],
                         water: [],
                         landcover: [],
                         landuse: [],
-                        road_label: [],
+                        road_label: {
+                            color: "red",
+                            weight: 2
+                        },
                         boundary: [],
                         place: [],
                         poi: []
@@ -168,13 +172,18 @@ export class MapTilerVectorTileProvider {
                 feature.sourceObservations.layerName = entry.layerName;
 
                 // build a spatial reference for the catalogue
-                const spatialReference = new SpatialReference();
+                const spatialReference = new ProviderSpatialReference();
 
                 spatialReference.source = this.#providerId;
 
                 spatialReference.representation = {
                     tile: tile._tileCoord
                 };
+
+                // // if 
+                // if (entry.layerName.startsWith('road')) {
+                //     console.log(`Feature ${entry.layerName} has properties:`, entry.feature.properties);
+                // }
 
                 if (entry.feature._point) {
                     spatialReference.representation.point = entry.feature._point;

@@ -37,6 +37,23 @@ setTimeout(() => {
     mapTileProvider.catalogueVisibleFeatureProperties(catalogue);
     console.log(catalogue);
 
+    // find catalogue.features() that have a feature.sourceObservations.layerName == 'road_label'
+    // and show the associated feature.properties.name
+    const roadLabelFeatures = catalogue.features().filter(feature => feature.sourceObservations.layerName === 'road_label');
+    console.log({
+        roadLabelFeatures: roadLabelFeatures
+    });
+    const roadLabelFeatureNames = roadLabelFeatures.map(feature => feature.propertyValues.find(propertyValue => propertyValue.property.name === 'name')?.value);
+    console.log({
+        roadLabelFeatureNames: roadLabelFeatureNames
+    });
+
+    // get a distinct list of feature.sourceObservations.layerName values from the catalogue
+    const distinctLayerNames = [...new Set(catalogue.features().map(feature => feature.sourceObservations.layerName))];
+    console.log({
+        distinctLayerNames: distinctLayerNames
+    });
+
     // load the exchange language
     console.log(exchangeLanguage);
 

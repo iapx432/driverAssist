@@ -6,12 +6,23 @@ import { getEffectiveProvider } from '../../providers/definitions.js';
 
 import { httpRequest} from '../../../http/httpRequest.js';
 
+/**
+ * 
+ * @param {{lng,lat}} start 
+ * @param {{lng,lat}} end 
+ * @returns http response from Open Route Service API containing route data between start and end points.
+ * 
+ * @dal_EntityType Provider
+ */
+
+export const OrsProviderId = "ors";
+
 export async function getRoute(
     start,
     end
 ) {
     try {
-        const provider = getEffectiveProvider("ors");
+        const provider = getEffectiveProvider(OrsProviderId);
         const url = provider.profiles.find(profile => profile.id === "driving-car").url;
 
         const response =  await httpRequest(
@@ -46,7 +57,7 @@ export async function getRoute(
 export async function testProviderConnection() {
 
     try {
-        const provider = getEffectiveProvider("ors");
+        const provider = getEffectiveProvider(OrsProviderId);
         const url = provider.profiles.find(profile => profile.id === "driving-car").url;
 
         await httpRequest(

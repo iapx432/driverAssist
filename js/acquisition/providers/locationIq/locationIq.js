@@ -2,6 +2,10 @@
 
 // A simple module to convert a [lat, lng] into a street address.
 
+/**
+ * @dal_entityType Provider
+ */
+
 import { httpRequest}
 from '../../../http/httpRequest.js';
 
@@ -10,12 +14,14 @@ import {
 }
 from '../../providers/definitions.js';
 
+export const LocationIqProviderId = "locationIq";
+
 export async function getAddressFromLatitudeLongitude(
     lat,
     lng
 ) {
     try {
-        const provider = getEffectiveProvider("locationIq");
+        const provider = getEffectiveProvider(LocationIqProviderId);
 
         const url =
             `${provider.apiUrl}` +
@@ -67,7 +73,7 @@ export async function getCurrentPosition() {
 export async function testProviderConnection() {
 
     try {
-        const provider = getEffectiveProvider("locationIq");
+        const provider = getEffectiveProvider(LocationIqProviderId);
 
         const url =
             `${provider.apiUrl}` +

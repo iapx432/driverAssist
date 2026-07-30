@@ -9,13 +9,15 @@ from '../../../http/httpRequest.js';
 import { getEffectiveProvider }
 from '../definitions.js';
 
+export const MapTilerProviderId = "maptiler";
+
 export async function getProtocolBuffer(
     x,
     y,
     z
 ) {
     try {
-        const provider = getEffectiveProvider("maptiler");  
+        const provider = getEffectiveProvider(MapTilerProviderId);
 
         const url =
             `${provider.apiUrl}` +
