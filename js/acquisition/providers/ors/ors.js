@@ -6,17 +6,17 @@ import { getEffectiveProvider } from '../../providers/definitions.js';
 
 import { httpRequest} from '../../../http/httpRequest.js';
 
+
+export const OrsProviderId = "ors";
+
 /**
  * 
  * @param {{lng,lat}} start 
  * @param {{lng,lat}} end 
  * @returns http response from Open Route Service API containing route data between start and end points.
  * 
- * @dal_EntityType Provider
+ * @dal_entityType Provider
  */
-
-export const OrsProviderId = "ors";
-
 export async function getRoute(
     start,
     end
@@ -54,6 +54,11 @@ export async function getRoute(
     }
 }
 
+
+/** 
+ * Tests the connection to the Open Route Service API by attempting to fetch a known route.
+ * @returns {Promise<Object>} An object containing the success status, HTTP status code, message, and any additional details.
+ */
 export async function testProviderConnection() {
 
     try {

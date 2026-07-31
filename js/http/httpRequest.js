@@ -13,6 +13,15 @@ export const HTTP_STATUS_NOT_FOUND = 404;
 export const HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
 export const HTTP_STATUS_GATEWAY_TIMEOUT = 504;
     
+/**
+ * Makes an HTTP request using the Fetch API.
+ *
+ * @param {string} url - The URL to request.
+ * @param {Object} [options={}] - The fetch options.
+ * @param {boolean} [raw=false] - Whether to return the raw response.
+ * @returns {Promise<Object>} The response data.
+ * @throws {Error} If the request fails or the response status is not OK.
+ */
 
 export async function httpRequest(
     url,

@@ -6,6 +6,10 @@ import { Feature } from "../spatial/feature.js";
  * Determines whether a Feature can be interpreted as a road,
  * regardless of which acquisition provider supplied it.
  */
+
+/**
+ * Represents a road in the Driver Assist vocabulary.
+ */
 export class Road {
 
     /**

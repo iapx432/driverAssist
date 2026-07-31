@@ -11,6 +11,13 @@ from '../definitions.js';
 
 export const MapTilerProviderId = "maptiler";
 
+/**
+ * Fetches the Protocol Buffer data for a specific tile coordinate from the MapTiler API.
+ * @param {number} x - The x coordinate of the tile.
+ * @param {number} y - The y coordinate of the tile.
+ * @param {number} z - The zoom level of the tile.
+ * @returns {Promise<Uint8Array|null>} The Protocol Buffer data for the tile, or null if not found.
+ */
 export async function getProtocolBuffer(
     x,
     y,
@@ -48,6 +55,10 @@ export async function getProtocolBuffer(
     }
 }
 
+/**
+ * Tests the connection to the MapTiler API by attempting to fetch a known tile.
+ * @returns {Promise<Object>} An object containing the success status, HTTP status code, message, and any additional details.
+ */
 export async function testProviderConnection() {
 
     try {

@@ -19,6 +19,10 @@ let lastAnalysedPosition = null;
 
 const CURSOR_MOVE_DISTANCE_THRESHOLD = 5;
 
+/**
+ * Creates a Leaflet map and sets up click event handling to display coordinates.
+ * @returns {L.Map} The created Leaflet map instance.
+ */
 export function createMap() {
 
     const map = L.map('map')
@@ -53,7 +57,12 @@ export function createMap() {
 
     return map;
 }
-
+    
+/**
+ * Initialises mouse tracking on the given Leaflet map.
+ * @param {L.Map} map - The Leaflet map instance.
+ * @param {function} notification - The function to call with the current latitude and longitude.
+ */
 export function initialiseMouseTracking(map, notification) {
 
     // add mouse move listener to update status bar with latitude and longitude
@@ -104,6 +113,11 @@ export function initialiseMouseTracking(map, notification) {
     );    
 }
 
+/**
+ * Displays the current location on the map with a circle indicating accuracy and a marker.
+ * @param {L.Map} map - The Leaflet map instance.
+ * @param {GeolocationPosition} position - The geolocation position object containing coordinates and accuracy.
+ */
 export function showCurrentLocationOnMap(
     map,
     position

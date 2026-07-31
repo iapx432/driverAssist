@@ -4,6 +4,14 @@
 
 let routeLayer = null;
 
+/**
+ * Draws a route on the map using the provided GeoJSON data.
+ * If a route layer already exists, it will be removed before drawing the new route.
+ *
+ * @param {Object} map - The Leaflet map instance.
+ * @param {Object} geojson - The GeoJSON data representing the route.
+ * @returns {void}
+ */
 export function drawRoute(
     map,
     geojson

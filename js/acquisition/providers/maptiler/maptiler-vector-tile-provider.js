@@ -5,10 +5,24 @@ import { PropertyValue } from "../../../model/property-value.js";
 import { ProviderSpatialReference } from "../../../spatial/provider/spatial-reference.js";
 import { getEffectiveProvider } from "../definitions.js";
 
+
+/**
+ * Driver Assist acquisition provider: MapTiler Vector Tile Provider.
+ *
+ * This provider is responsible for acquiring vector tile data from the MapTiler service.
+ * It uses the Leaflet VectorGrid plugin to render and interact with vector tiles on a Leaflet map.
+ *
+ * The provider supports acquiring visible features, their layer names, properties, and structure usage from the currently visible tiles on the map.    
+ * It also provides methods to catalogue the visible features and their properties into a Catalogue object for further analysis and processing.
+ */
+
 /**
  * @dal_entityType Provider
  */
 
+/**
+ * Represents the MapTiler Vector Tile Provider for acquiring vector tile data.
+ */
 export class MapTilerVectorTileProvider {
     constructor() {
         this.map = null;
@@ -19,6 +33,12 @@ export class MapTilerVectorTileProvider {
     #providerId;
     #vectorLayer;
 
+    /**
+     * Initializes the MapTiler Vector Tile Provider with the specified map and provider ID.
+     * This method sets up the vector tile layer on the provided Leaflet map using the MapTiler API.
+     * @param {Object} map - The Leaflet map instance.
+     * @param {string} providerId - The ID of the MapTiler provider.
+     */
     initialise(map, providerId) {
 
         const provider = getEffectiveProvider(providerId);
@@ -60,12 +80,24 @@ export class MapTilerVectorTileProvider {
             );
         this.#vectorLayer.addTo(map);        
     }
+
+    /**
+     * Retrieves the current zoom level of the map and the maximum native zoom level of the vector tiles.
+     * @returns {Object} An object containing the current acquisition zoom level and the maximum native zoom level.
+     */
     getZoomLevel(){
         return ({
             acquisitionZoom: this.#vectorLayer._map.getZoom(),
             maxNativeZoom: this.#vectorLayer.options.maxNativeZoom
         });
     }
+
+    /**
+     * Acquires the visible features from the vector tiles for a specific layer name.
+     * This method iterates through the visible tiles and collects features that match the specified layer name.
+     * @param {string} layerName - The name of the layer to acquire features from.
+     * @returns {Array} An array of visible features for the specified layer name.
+     */
     acquireVisibleFeatures(layerName) {
         const features = [];
         for (const tile of Object.values(this.#vectorLayer._vectorTiles)) {
@@ -77,6 +109,12 @@ export class MapTilerVectorTileProvider {
         }
         return features;
     }
+
+    /**
+     * Acquires the names of the visible feature layers from the vector tiles.
+     * This method creates a map of unique entry.layerName values for each tile.
+     * @returns {Map} A map where the keys are tile coordinates and the values are arrays of layer names.
+     */
     acquireVisibleFeatureLayerNames() {
         const featureLayerNames = new Map();
 
@@ -95,6 +133,12 @@ export class MapTilerVectorTileProvider {
 
         return featureLayerNames;
     }
+
+    /**
+     * Acquires the names of the properties for each visible feature layer from the vector tiles.
+     * This method creates a map of unique entry.feature.properties object member property names for each layer.
+     * @returns {Map} A map where the keys are layer names and the values are objects containing property names.
+     */
     acquireVisibleFeatureLayerNameProperties() {
         const featureNames = new Map();
 
@@ -118,6 +162,12 @@ export class MapTilerVectorTileProvider {
 
         return featureNames;
     }
+
+    /**
+     * Acquires the usage of visible feature properties from the vector tiles.
+     * This method creates a map of unique entry.feature.properties object member property names and their values.
+     * @returns {Map} A map where the keys are layer names and the values are objects containing property usage information.
+     */
     acquireVisibleFeaturePropertyUsage() {
         const features = new Map();
         const propertyNames = [];
@@ -153,11 +203,24 @@ export class MapTilerVectorTileProvider {
 
         return features;
     }
+
+    /**
+     * Acquires the IDs of the visible vector tiles on the map.
+     * This method returns an array of tile IDs in the format "x:y:z" for each visible tile.
+     * @returns {Array} An array of visible vector tile IDs.
+     */
     acquireVisibleFeatureTileIds() {
         const featureTileIds = [];
         const ids = Object.keys(this.#vectorLayer._vectorTiles);
         return ids;
     }
+
+    /**
+     * Catalogues the visible features from the vector tiles into a Catalogue object.
+     * This method creates Feature objects for each visible feature, along with their associated properties and spatial references.
+     * @param {Catalogue} catalogue - The Catalogue object to populate with the visible features.
+     * @returns {void}
+     */
     catalogueVisibleFeatureProperties(catalogue) {
 
         for (const tile of Object.values(this.#vectorLayer._vectorTiles)) {
@@ -179,11 +242,6 @@ export class MapTilerVectorTileProvider {
                 spatialReference.representation = {
                     tile: tile._tileCoord
                 };
-
-                // // if 
-                // if (entry.layerName.startsWith('road')) {
-                //     console.log(`Feature ${entry.layerName} has properties:`, entry.feature.properties);
-                // }
 
                 if (entry.feature._point) {
                     spatialReference.representation.point = entry.feature._point;
@@ -218,6 +276,13 @@ export class MapTilerVectorTileProvider {
             }
         }
     }
+
+    /**
+     * Acquires the structure usage of visible features from the vector tiles.
+     * This method creates a map of unique entry.feature object member property names and their types.
+     * 
+     * @returns {Map} A map where the keys are archetypes (e.g., "point", "geometry") and the values are objects containing layer names and property names.
+     */
     acquireVisibleFeatureStructureUsage() {
 
         // create a map of unique entry.feature object member property names and their types

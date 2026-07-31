@@ -5,6 +5,16 @@
  * intelligence; it simply relates a spatial reference and a set of
  * observed property values.
  */
+
+/**
+ * @typedef {Object} Feature
+ * @property {string} id - Stable identifier within the catalogue.
+ * @property {string|null} source - Provenance, e.g. "maptiler", "osm", "ors", "weather".
+ * @property {string|null} sourceId - Provider-specific identifier.
+ * @property {string|null} spatialReference - Where this feature exists.
+ * @property {PropertyValue[]} propertyValues - Observed property values.
+ * @property {Object} sourceObservations - Provider-specific observations about this feature.
+ */
 export class Feature {
 
     /**

@@ -16,6 +16,14 @@ from '../../providers/definitions.js';
 
 export const LocationIqProviderId = "locationIq";
 
+/**
+ * Gets the address corresponding to the given latitude and longitude.
+ *
+ * @param {number} lat - The latitude.
+ * @param {number} lng - The longitude.
+ * @returns {Promise<Object|null>} The address object or null if not found.
+ */
+
 export async function getAddressFromLatitudeLongitude(
     lat,
     lng
@@ -50,7 +58,12 @@ export async function getAddressFromLatitudeLongitude(
     }
 }
 
-// from browser geolocation API
+/**
+ * Gets the current position from the browser's geolocation API.
+ *
+ * @returns {Promise<GeolocationPosition>} The current position from browser geolocation API
+ */
+ 
 export async function getCurrentPosition() {
 
     return new Promise(
@@ -70,6 +83,13 @@ export async function getCurrentPosition() {
         }
     );
 }
+
+/**
+ * Tests the connection to the LocationIQ provider.
+ *
+ * @returns {Promise<Object>} The result of the connection test.
+ */
+
 export async function testProviderConnection() {
 
     try {

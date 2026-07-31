@@ -10,6 +10,11 @@ from '../utils/format.js';
 
 let steepnessLayers = [];
 
+/**
+ * Clears all steepness evidence layers from the map.
+ *
+ * @returns {void}
+ */
 export function clearSteepnessEvidence() {
 
     steepnessLayers.forEach(
@@ -19,6 +24,13 @@ export function clearSteepnessEvidence() {
     steepnessLayers = [];
 }
 
+/**
+ * Renders steepness evidence on the map.
+ *
+ * @param {Object} map - The map instance.
+ * @param {Object} route - The route containing evidence and coordinate data.
+ * @returns {void}
+ */
 export function renderSteepnessEvidence(
     map,
     route
@@ -43,7 +55,14 @@ export function renderSteepnessEvidence(
         }
     );
 }
-
+/**
+ * Renders a steepness span on the map as a colored polyline.
+ * @param {Object} map - The map instance.
+ * @param {Object} route - The route containing coordinate data.
+ * @param {Object} evidence - The steepness evidence to render.
+ * @param {number} index - The index of the steepness evidence in the route's evidence array.
+ * @returns {void}
+ */
 function renderSteepnessSpan(
     map,
     route,
@@ -116,6 +135,11 @@ function renderSteepnessSpan(
     steepnessLayers.push(layer);
 }
 
+/**
+ * Returns a human-readable description of the steepness range based on the category.
+ * @param {string} category - The steepness category.
+ * @returns {string} - The description of the steepness range.
+ */
 function getSteepnessRange(
     category
 ) {

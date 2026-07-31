@@ -9,6 +9,13 @@
 // The getSteepnessIntervals function returns an array of all steepness intervals for the route.
 // The getCoordinateAtDistance function retrieves the coordinate data for the point along the route that is at or just after a specified distance in meters.
 
+
+/**
+ * Creates a route model from the given GeoJSON data.
+ *
+ * @param {Object} geojson - The GeoJSON data from the ORS API.
+ * @returns {Object} - The constructed route model.
+ */
 export function createRouteModel(geojson) {
 
     const feature =
@@ -62,6 +69,12 @@ export function createRouteModel(geojson) {
     };
 }
 
+/**
+ * Retrieves the coordinate data (longitude, latitude, elevation) for a specific index in the coordinates array.
+ * @param {Array} coordinates - The array of coordinates from the route model.
+ * @param {number} index - The index of the coordinate to retrieve.
+ * @returns {Object} - An object containing lng, lat, and elevation properties.
+ */
 export function getCoordinate(
     coordinates,
     index
@@ -78,6 +91,12 @@ export function getCoordinate(
     };
 }
 
+/**
+ * Retrieves the steepness segment information for a given index.
+ * @param {Object} route - The route model object.
+ * @param {number} index - The index of the steepness segment to retrieve.
+ * @returns {Object} - The steepness segment object.
+ */
 export function getSteepnessSegment(
     route,
     index
@@ -86,6 +105,12 @@ export function getSteepnessSegment(
     return route.steepnessSegments[index];
 }
 
+/**
+ * Calculates the distance in meters between two geographic points using the Haversine formula.
+ * @param {Object} pointA - The first point with lat and lng properties.
+ * @param {Object} pointB - The second point with lat and lng properties.
+ * @returns {number} - The distance between the two points in meters.
+ */
 export function distanceBetweenCoordinates(
     pointA,
     pointB
@@ -129,6 +154,11 @@ export function distanceBetweenCoordinates(
     return R * c;
 }
 
+/**
+ * Processes the coordinates array to create an array of coordinate data objects that include longitude, latitude, elevation, and cumulative distance from the start of the route.
+ * @param {Array} coordinates - The array of coordinates from the route model.
+ * @returns {Array} - An array of coordinate data objects.
+ */
 function buildCoordinateData(
     coordinates
 ) {
@@ -178,6 +208,12 @@ function buildCoordinateData(
     return coordinateData;
 }
 
+/**
+ * Retrieves the steepness interval information for a given index, including start and end indices, distances, length, and category.
+ * @param {Object} route - The route model object.
+ * @param {number} index - The index of the steepness interval to retrieve.
+ * @returns {Object} - The steepness interval object.
+ */
 export function getSteepnessInterval(
     route,
     index
@@ -219,6 +255,12 @@ export function getSteepnessInterval(
     };
 }
 
+/**
+ * Returns an array of all steepness intervals for the route.
+ * Each interval includes start and end indices, distances, length, and category.
+ * @param {Object} route - The route model object.
+ * @returns {Array} - An array of steepness interval objects.
+ */
 export function getSteepnessIntervals(route) {
 
     return route.steepnessSegments.map(
@@ -259,6 +301,12 @@ export function getSteepnessIntervals(route) {
     );
 }
 
+/**
+ * Retrieves the coordinate data for the point along the route that is at or just after a specified distance in meters.
+ * @param {Object} route - The route model object.
+ * @param {number} distanceM - The distance in meters.
+ * @returns {Object|undefined} - The coordinate data object at the specified distance, or undefined if not found.
+ */
 export function getCoordinateAtDistance(
     route,
     distanceM

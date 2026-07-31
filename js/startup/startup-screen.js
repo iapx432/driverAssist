@@ -13,6 +13,11 @@ from '../application/application.js';
 
 const providerConnectionStatus = {};
 
+/**
+ * Displays the startup screen with provider information and API key input fields.
+ * This function dynamically generates the HTML content for the startup screen based on the available providers.
+ * @returns {void}
+ */
 export function showStartupScreen() {
 
     const startupScreen =
@@ -31,6 +36,10 @@ export function showStartupScreen() {
     renderContinueButton();
 }
 
+/** * Renders the information and input fields for a specific provider on the startup screen.
+ * @param {Object} provider - The provider object containing details such as name, description, and API key requirements.
+ * @returns {void}
+ */
 export function renderProvider(
     provider
 ) {
@@ -129,6 +138,11 @@ export function renderProvider(
     startupScreen.appendChild(card);
 }
 
+/** * Updates the connection status for a specific provider on the startup screen.
+ * @param {string} providerId - The identifier for the provider.
+ * @param {Object} result - The result object containing success status and message.
+ * @returns {void}
+ */
 export function updateProviderStatus(
     providerId,
     result
@@ -153,16 +167,22 @@ export function updateProviderStatus(
 
 }
 
+/** * Hides the startup screen and displays the main application interface.
+ * This function is called when all required startup conditions have been met, allowing the user to proceed with the application.
+ * @returns {void}
+ */
 export function hideStartupScreen() {
 
     // make map visible after all provider connection tests have completed
     document.getElementById("startupScreen").style.display = "none";
     document.getElementById("map").style.display = "block";
-
-
-
 }
 
+/** 
+ * Renders the "Continue" button on the startup screen.
+ * The button is initially disabled and becomes enabled when all required startup conditions have been met.
+ * @returns {void}
+ */
 function renderContinueButton() {
 
     const startupScreen =
@@ -190,6 +210,11 @@ function renderContinueButton() {
     startupScreen.appendChild(button);
 }
 
+/** 
+ * Updates the state of the "Continue" button based on the connection status of all required providers.
+ * The button is enabled only when all required providers have been successfully connected.
+ * @returns {void}
+ */
 function updateContinueButton() {
 
     const ready = providers.every(

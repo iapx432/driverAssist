@@ -10,6 +10,13 @@ let endMarker = null;
 let startPoint = null;
 let endPoint = null;
 
+/**
+ * Initializes the route selection process on the map.
+ * Sets up a click event listener to allow users to select start and end points for their route.
+ * @param {Object} map - The Leaflet map instance.
+ * @param {Function} setStatusGuidance - A function to update the status guidance message.
+ * @returns {void}
+ */
 export function initialiseRouteSelection(map, setStatusGuidance) {
 
     map.on('click', (e) => {
@@ -80,6 +87,10 @@ export function initialiseRouteSelection(map, setStatusGuidance) {
     });
 }
 
+/**
+ * Retrieves the currently selected start and end points for the route.
+ * @returns {Object} - An object containing the start and end points.
+ */
 export function getRoutePoints() {
 
     return {

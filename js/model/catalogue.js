@@ -7,6 +7,12 @@ import { Feature } from "./feature.js";
  * A Catalogue stores and indexes the first-class objects that make up
  * the observed world.
  */
+
+/**
+ * @typedef {Object} Catalogue
+ * @property {Map<string, Feature>} #features - A map of features by their id.
+ * @property {Map<string, Property>} #properties - A map of properties by their name.
+ */
 export class Catalogue {
 
     #features = new Map();

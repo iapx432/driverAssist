@@ -17,6 +17,13 @@ from '../../../log/application-log.js';
 
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 
+/**
+ * Fetches road information from the Open Street Map (OSM) Overpass API for a given latitude and longitude.
+ * @param {number} lat - The latitude of the location to query.
+ * @param {number} lng - The longitude of the location to query.
+ * @param {boolean} [enableLogging=true] - Whether to enable logging of the request and response.
+ * @returns {Promise<Object>} The response from the Overpass API.
+ */
 export async function getRoadInfo(
     lat,
     lng,
@@ -42,6 +49,12 @@ out tags;
     return response;
 }
 
+/**
+ * Sends a request to the Overpass API with the specified query and handles rate limiting and retry logic.
+ * @param {Object} query - The query object containing method, headers, and body for the request.
+ * @param {boolean} [enableLogging=true] - Whether to enable logging of the request and response.
+ * @returns {Promise<Object>} The response from the Overpass API.
+ */
 async function overpassRequest(
     query,
     enableLogging = true
@@ -94,6 +107,12 @@ async function overpassRequest(
     }
 }
 
+/**
+ * Retrieves the recommended retry delay from the Overpass API status endpoint.
+ * If the status endpoint is unavailable, a fallback delay of 5 seconds is used.
+ * @param {boolean} [enableLogging=true] - Whether to enable logging of the request and response.
+ * @returns {Promise<number>} The recommended retry delay in milliseconds.
+ */
 async function getOverpassRetryDelayMs(enableLogging = true) {
 
     try {
@@ -121,6 +140,12 @@ async function getOverpassRetryDelayMs(enableLogging = true) {
     }
 }
 
+/**
+ * Parses the Overpass API status text to extract the recommended retry delay in milliseconds.
+ * If the status text does not contain a valid delay, a fallback delay of 5 seconds is returned.
+ * @param {string} statusText - The status text from the Overpass API.
+ * @returns {number} The recommended retry delay in milliseconds.
+ */
 function parseRetryDelayMs(
     statusText
 ) {
@@ -138,6 +163,11 @@ function parseRetryDelayMs(
     ) * 1000;
 }
 
+/**
+ * Extracts relevant road information from the response received from the Overpass API.
+ * @param {Object} osmResponse - The response object from the Overpass API.
+ * @returns {Array<Object>} An array of road information objects, each containing details about a road.
+ */
 export function extractRoadInfo(
     osmResponse
 ) {
@@ -169,6 +199,10 @@ export function extractRoadInfo(
     return roads;
 }
 
+/**
+ * Tests the connection to the Open Street Map (OSM) Overpass API by attempting to fetch a known tile.
+ * @returns {Promise<Object>} An object containing the success status, HTTP status code, message, and any additional details.
+ */
 export async function testProviderConnection() {
 
     try {

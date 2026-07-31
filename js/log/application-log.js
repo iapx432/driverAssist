@@ -14,6 +14,15 @@
 //         - started
 //     ) / 1000;
 
+/**
+ * Logs an informational message to the application log.
+ *
+ * @param {Object} logEntry - The log entry object.
+ * @param {string} logEntry.message - The log message.
+ * @param {boolean} [logEntry.duration] - Whether to include the duration.
+ * @param {number} [logEntry.startTime] - The start time for duration calculation.
+ * @returns {Object} The log entry object.
+ */
 export function logInfo(
     logEntry
 ) {
@@ -37,6 +46,13 @@ export function logInfo(
     return logEntry;
 }
 
+/**
+ * Logs a message to the application log.
+ *
+ * @param {Object} logEntry - The log entry object.
+ * @param {string} logEntry.message - The log message.
+ * @param {string} logEntry.level - The log level (info, warning, error).
+ */
 function log(
     logEntry
 ) {
@@ -55,6 +71,12 @@ function log(
     log.appendChild(div);
     log.scrollTop = log.scrollHeight;
 }
+
+/**
+ * Formats a timestamp into a human-readable string.
+ * @param {number} [timestamp=Date.now()] - The timestamp to format (in milliseconds).
+ * @returns {string} The formatted timestamp in the format "HH:MM:SS.mmm".
+ */
 
 export function formatTimestamp(
     timestamp = Date.now()
