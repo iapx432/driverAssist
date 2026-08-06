@@ -4,8 +4,8 @@
  * A Canonical SpatialReference encapsulates the driverAssist representation
  * of a ProviderSpatialReference and provides the basis for additional interpretation.
  *
- * @dal_contains Point
- * @dal_contains PolyLine
+ * @al_contains Point
+ * @al_contains PolyLine
  *
  */
 export class CanonicalSpatialReference {

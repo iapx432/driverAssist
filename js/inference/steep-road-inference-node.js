@@ -12,7 +12,7 @@ from '../route/evidence.js';
 // add JSDoc comments to the functions in this file
 
 /**
- * @dal_entityType InferenceNode
+ * @al_entityType InferenceNode
  */
 
 export class SteepRoadInferenceNode

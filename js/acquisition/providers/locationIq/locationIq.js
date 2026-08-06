@@ -3,7 +3,7 @@
 // A simple module to convert a [lat, lng] into a street address.
 
 /**
- * @dal_entityType Provider
+ * @al_entityType Provider
  */
 
 import { httpRequest}

@@ -17,7 +17,7 @@ import { getEffectiveProvider } from "../definitions.js";
  */
 
 /**
- * @dal_entityType Provider
+ * @al_entityType Provider
  */
 
 /**

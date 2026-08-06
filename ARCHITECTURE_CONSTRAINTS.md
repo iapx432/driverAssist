@@ -16,15 +16,15 @@ Transformer consumes Provider
 
 Every entity with
 
-@dal_entityType Transformer
+@al_entityType Transformer
 
 shall declare exactly one
 
-@dal_transformsFrom
+@al_transformsFrom
 
 whose target entity has
 
-@dal_entityType Canonical
+@al_entityType Canonical
 
 ### Reason
 
@@ -44,15 +44,15 @@ Transformer produces Canonical
 
 Every entity with
 
-@dal_entityType Transformer
+@al_entityType Transformer
 
 shall declare exactly one
 
-@dal_transformsTo
+@al_transformsTo
 
 whose target entity has
 
-@dal_entityType Canonical
+@al_entityType Canonical
 
 ### Reason
 

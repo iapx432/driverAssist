@@ -5,9 +5,9 @@ import { PolyLine } from '../canonical/polyLine.js';
 import { MapTilerProviderId } from '../../acquisition/providers/maptiler/maptiler.js';
 
 /**
- * @dal_entityType Transformer
- * @dal_transformsFrom ProviderSpatialReference
- * @dal_transformsTo CanonicalSpatialReference
+ * @al_entityType Transformer
+ * @al_transformsFrom ProviderSpatialReference
+ * @al_transformsTo CanonicalSpatialReference
  */
 export class ProviderSpatialReferenceToCanonicalTransformer {
 

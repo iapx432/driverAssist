@@ -15,7 +15,7 @@ export const OrsProviderId = "ors";
  * @param {{lng,lat}} end 
  * @returns http response from Open Route Service API containing route data between start and end points.
  * 
- * @dal_entityType Provider
+ * @al_entityType Provider
  */
 export async function getRoute(
     start,

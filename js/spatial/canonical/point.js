@@ -5,7 +5,7 @@
  * 
  * A point with no coordinates is invalid and should be represented as null.
  *
- * @dal_entityType Point
+ * @al_entityType Point
  */
 
 export class Point {

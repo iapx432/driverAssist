@@ -10,7 +10,7 @@
  *   - Route geometry
  *   - Weather grid cell
  * 
- * @dal_entityType ProviderSpatialReference
+ * @al_entityType ProviderSpatialReference
  * 
  */
 export class ProviderSpatialReference {

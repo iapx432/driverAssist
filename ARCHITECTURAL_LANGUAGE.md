@@ -17,13 +17,28 @@ Architectural annotations may be used to:
 - Assist AI coding tools in understanding DriverAssist's architectural language.
 - Support impact analysis when classes or relationships change.
 
+
+
+
+ * @al_invariant AL-I-001: The semantic topology shall be recursively congruent with the data topology. The data and semanticContext must be consistent with each other.  The semanticContext must accurately describe the meaning of the data.
+
+---
+
+# Core
+
+The architectural core attributes define the key meanings of fondational elements and are designed to be represented as a graph and inspectable.
+
+## `@al_invariant Document Name: Summary`
+
+---
+
 ---
 
 # Entity Types
 
 Entity Types describe the architectural role of a class.
 
-## `@dal_entityType Canonical`
+## `@al_entityType Canonical`
 
 A Canonical entity represents DriverAssist's internal representation of information.
 
@@ -33,7 +48,7 @@ Canonical entities are independent of external providers and form the stable lan
 
 ```javascript
 /**
- * @dal_entityType Canonical
+ * @al_entityType Canonical
  */
 export class CanonicalSpatialReference {
 
@@ -42,7 +57,7 @@ export class CanonicalSpatialReference {
 
 ---
 
-## `@dal_entityType Provider`
+## `@al_entityType Provider`
 
 A Provider entity represents information originating from an external system or service.
 
@@ -52,7 +67,7 @@ Provider entities preserve the provider's representation without modification.
 
 ```javascript
 /**
- * @dal_entityType Provider
+ * @al_entityType Provider
  */
 export class MapTilerSpatialReference {
 
@@ -61,7 +76,7 @@ export class MapTilerSpatialReference {
 
 ---
 
-## `@dal_entityType Transformer`
+## `@al_entityType Transformer`
 
 A Transformer converts one architectural representation into another.
 
@@ -71,7 +86,7 @@ Transformers should contain no long-term state.
 
 ```javascript
 /**
- * @dal_entityType Transformer
+ * @al_entityType Transformer
  */
 export class ProviderSpatialReferenceToCanonicalTransformer {
 
@@ -84,7 +99,7 @@ export class ProviderSpatialReferenceToCanonicalTransformer {
 
 Relationship Types describe how architectural entities are related.
 
-## `@dal_contains`
+## `@al_contains`
 
 Indicates that one entity directly contains references to another entity.
 
@@ -100,7 +115,7 @@ May be used to generate:
 
 ```javascript
 /**
- * @dal_contains Point
+ * @al_contains Point
  */
 points = [];
 ```
@@ -109,14 +124,14 @@ or
 
 ```javascript
 /**
- * @dal_contains PolyLine
+ * @al_contains PolyLine
  */
 items = [];
 ```
 
 ---
 
-## `@dal_transformsTo`
+## `@al_transformsTo`
 
 Indicates that a Transformer converts one architectural entity into another.
 
@@ -132,7 +147,7 @@ May be used to generate:
 
 ```javascript
 /**
- * @dal_transformsTo CanonicalSpatialReference
+ * @al_transformsTo CanonicalSpatialReference
  */
 export class ProviderSpatialReferenceToCanonicalTransformer {
 
@@ -141,11 +156,11 @@ export class ProviderSpatialReferenceToCanonicalTransformer {
 
 ---
 
-## `@dal_transformsFrom`
+## `@al_transformsFrom`
 
 Indicates that a Transformer converts From one architectural entity into another.
 
-This annotation should normally appear alongside a corresponding `@dal_dependsOn` or explicit input annotation in future revisions.
+This annotation should normally appear alongside a corresponding `@al_dependsOn` or explicit input annotation in future revisions.
 
 May be used to generate:
 
@@ -157,7 +172,7 @@ May be used to generate:
 
 ```javascript
 /**
- * @dal_transformsFrom ProviderSpatialReference
+ * @al_transformsFrom ProviderSpatialReference
  */
 export class ProviderSpatialReferenceToCanonicalTransformer {
 
@@ -166,7 +181,7 @@ export class ProviderSpatialReferenceToCanonicalTransformer {
 
 ---
 
-## `@dal_dependsOn`
+## `@al_dependsOn`
 
 Indicates that an entity has a direct architectural dependency on another entity.
 
@@ -182,7 +197,7 @@ May be used to generate:
 
 ```javascript
 /**
- * @dal_dependsOn CanonicalSpatialReference
+ * @al_dependsOn CanonicalSpatialReference
  */
 export class Feature {
 

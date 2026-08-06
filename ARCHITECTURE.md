@@ -75,6 +75,18 @@ Architectural information should therefore be:
 
 The architectural model generated from the source code should become the canonical representation of the system's architectural intent.
 
+# Architectural Drivers
+
+Reduce the Cost of Understanding.
+Preserve semantic meaning across implementation change.
+Maximise orthogonality.
+Make uncertainty visible before implementation.
+Make architectural judgement inspectable.
+Reduce irreversible decisions.
+Support incremental adoption into existing estates.
+
+Capabilities are considered when they answer "Which architectural driver does this strengthen?"
+
 # Architectural Metaphore
 
 This description is intended to describe the kind of reasoning stages and separation which this project can be compared with in a simplified form but applied to a completely different domain.

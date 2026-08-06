@@ -15,8 +15,8 @@
  * 
  * A polyLine with no points is invalid and should be represented as null.
  *
- * @dal_entityType PolyLine
- * @dal_contains Point
+ * @al_entityType PolyLine
+ * @al_contains Point
 */
 
 export class PolyLine {

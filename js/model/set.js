@@ -4,8 +4,7 @@ import { SemanticContext } from './semantic-context.js';
  * Represents a set of items.
  *
  * @typedef {Object} Set
- * @property {Array<any>} data - The data in the set. [] | [1] | [1,null,<any>] | [1,null,[2,3,[4,null,6],<any>]] - [] ... [large multi-dimensional sparse array], just not null
- *                               This may need typescript to force semantic mapping certainty and defend against inadmissible data structures.
+ * @property {Array<any>} data - The data in the set. [] ... [large multi-dimensional sparse array], just not null
  * @property {any} semanticContext - The semantics of the set.  Matching the data structure, but containing the semantic meaning of each item.
  * @method setData(data) - Sets the items in the set.
  * @method setSemanticContext(semanticContext) - Sets the semantics of the set.
@@ -30,7 +29,37 @@ export class Set {
     // Every semantic boundary corresponds to exactly one data boundary 
     // This results in recursive isomorphism between the data and semanticContext structures, ensuring that the semanticContext accurately describes the meaning of the data.
 
+    // data.
+    // [] | 
+    // [1] | 
+    // [1,null,<any>] | 
+    // [1,null,[2,3,[4,null,6],<any>]]
+
+    // data cannot be null.
+    // data may contain no items.
+    // if data contains not items, there must not be any semanticContext items at that dimensional level.
+    // if data contains items, they must directly correspond to the semanticContext at that dimensional level.
+
+    // semanticContext
+    // [] | 
+    // [Semantics] | 
+    // [Semantics,[Semantics],Semantics] | 
+    // [Semantics,[Semantics,Semantics,[Semantics,Semantics],Semantics]],Semantics]
+
+    // semanticContext cannot be null.
+    // semanticContext may contain no items.
+    // if semanticContext contains no items, there must not be any data items at that dimensional level.
+    // if semanticContext contains items, they must directly correspond to the data at that dimensional level.
+
+    // Each distinguishable semantic region has exactly one semantic interpretation.
+
+    // The semantics must always be able to completely interpret the data,
+    // and the structure of the data must determine exactly which semantic interpretation applies at every semantic boundary.
+    // That's saying there is a bijection of interpretation.
+
     setData(data) {
+        // write all the ASSETS, exceptions to protect invariant AL-I-001
+
         // Ensure that the data is an array
         if (!Array.isArray(data)) {
             throw new Error('Set.data must be an array.');
@@ -38,13 +67,15 @@ export class Set {
         this.#data = data;
     }
 
-    setSemanticContext(semanticContext) {
-        this.#semanticContext = semanticContext;
-    }
-
     getData() {
         return this.#data;
     }
+
+    setSemanticContext(semanticContext) {
+        // write all the ASSETS, exceptions to protect invariant AL-I-001
+
+        this.#semanticContext = semanticContext;
+    }    
 
     getSemanticContext() {
         return this.#semanticContext;
