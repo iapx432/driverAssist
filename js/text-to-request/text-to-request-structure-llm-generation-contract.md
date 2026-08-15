@@ -30,7 +30,7 @@ The user.
 I/me/the code.
 You/the LLM.
 
-The user refers to the identity of the origination of the text question.  This question is then passed to me. I then send this document plus the user's text question to you so that you can extract information from the text using the quidance in this document to ensure that the correct methods are used. Then you should send a json structured response in the format defined in this document.  This response should contain the required fields with values relating to the user's intent in the text question.
+The user refers to the identity of the origination of the text question.  This question is then passed to me. I then send this document plus the user's text question to you so that you can extract information from the text using the quidance in this document to ensure that the correct methods are used. Then you should send a json structured response in the format defined in this document in the section titled Intent Output Schema.  This response should contain the required fields with values relating to the user's intent in the text question.
 
 Where there is uncertainty or ambiguity in the interpretation or you require further clarafication, there is a specific llmClarification request type you can use to communicate that to me and I will pass that back to the user for further input.  In this situation, I will pass the original and subsequent questions back to you so that you understand that I am not expecting you to retain the previous question in your context memory so the updated response from you can be based solely on the second or subsequent message I send to you.
 
