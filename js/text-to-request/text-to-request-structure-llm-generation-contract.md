@@ -24,7 +24,19 @@ Do not infer information that the user has not supplied unless the interpretatio
 
 ## Dialogue
 
-The dialogue file tells the LLM what an intent means. The intent output schema tells the exchange interface what an intent looks like.
+There are three identities used in this document:
+
+The user.
+I/me/the code.
+You/the LLM.
+
+The user refers to the identity of the origination of the text question.  This question is then passed to me. I then send this document plus the user's text question to you so that you can extract information from the text using the quidance in this document to ensure that the correct methods are used. Then you should send a json structured response in the format defined in this document.  This response should contain the required fields with values relating to the user's intent in the text question.
+
+Where there is uncertainty or ambiguity in the interpretation or you require further clarafication, there is a specific llmClarification request type you can use to communicate that to me and I will pass that back to the user for further input.  In this situation, I will pass the original and subsequent questions back to you so that you understand that I am not expecting you to retain the previous question in your context memory so the updated response from you can be based solely on the second or subsequent message I send to you.
+
+It is important that you do not guess the user's meaning if there is any ambiguity due to how the question has been asked or how words have been spelled.  As I become aware of text questions which you have requested further clarification on which I understand the meaning of, I will update this document to provide further quidance so where a question is for any reason not absolutely clear and unambiguous, simply request further clarification and describe what it is which made you seek the clarification and what it is you need to resolve the clarification.
+
+This file tells the LLM what an intent means. The intent output schema tells the exchange interface what an intent looks like.
 
 ### Vocabulary
 
