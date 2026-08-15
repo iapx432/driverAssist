@@ -17,18 +17,42 @@ Architectural annotations may be used to:
 - Assist AI coding tools in understanding DriverAssist's architectural language.
 - Support impact analysis when classes or relationships change.
 
+# Referencing
 
+The architecture language uses an annotation referencing scheme to classify types of annotations that fulfil different purposes.  These are shown below.  The definitions of the language are held separately from the references to them which are held in code and other source files.
 
+## Scheme
 
- * @al_invariant AL-I-001: The semantic topology shall be recursively congruent with the data topology. The data and semanticContext must be consistent with each other.  The semanticContext must accurately describe the meaning of the data.
+A three part identifier is used to identify an architecture documentation reference.
+
+AL-{type}-{id}
+
+For example AL-I-1 
+
+### Type I: Invariant
+
+A definition which if changed would undermine the basis of the concept.  An Invariant must only be updated if all the architectural implications have been verified.
 
 ---
 
 # Core
 
-The architectural core attributes define the key meanings of fondational elements and are designed to be represented as a graph and inspectable.
+The architectural core attributes define the key meanings of foundational elements and are designed to be represented as a graph and inspectable.
 
-## `@al_invariant Document Name: Summary`
+## `@al_invariant AL-I-{id}`
+
+A reference to invariant document {id}.
+
+### Example
+
+```javascript
+/**
+ * @al_Invariant AL-I-1
+ */
+export class SemanticSet {
+
+}
+```
 
 ---
 
