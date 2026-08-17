@@ -90,3 +90,8 @@ $\lor$ |\lor| \\
 $\neg$ |\neg| \\
 $\top$ |\top| \\
 $\bot$ |\bot| \\
+
+## Multisets
+| Symbol | Github Latex |
+|--------|--------------|
+| $\uplus$ | Multiset union |
