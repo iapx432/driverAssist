@@ -14,8 +14,8 @@
 | ⊃ ⊋	| Proper Superset | A strictly contains B |
 | =	| Equal Sets | Same elements, regardless of order |
 | ≠	| Not Equal | Different elements |
-| $ \cup $	| Union | A ∪ B means everything in A or B |
-| $ \cap $	| Intersection | A ∩ B means everything common to both A and B |
+| $\cup$ | Union | A ∪ B means everything in A or B |
+| $\cap$ | Intersection | A ∩ B means everything common to both A and B |
 | - \ | Difference | A − B means everything in A that is not in B. Sometimes ∖ |
 | △ | Symmetric Difference | A △ B means elements in either set but not both |
 | c | Complement | Ac means everything in the Universal Set except A |
