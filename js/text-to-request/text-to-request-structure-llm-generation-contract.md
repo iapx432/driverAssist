@@ -94,9 +94,15 @@ This file tells the LLM what an intent means. The intent output schema tells the
 ## Tests ToDo
 
 Local information query
+
 Route planning
+
 Follow-up question
+
 Data freshness request
+
 Comparison
+
 What-if request
+
 Ambiguous Examples
