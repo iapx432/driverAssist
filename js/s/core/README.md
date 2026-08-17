@@ -14,15 +14,15 @@
 | ⊃ ⊋	| Proper Superset | A strictly contains B |
 | =	| Equal Sets | Same elements, regardless of order |
 | ≠	| Not Equal | Different elements |
-| ∪	| Union | A ∪ B means everything in A or B |
-| ∩	| Intersection | A ∩ B means everything common to both A and B |
+| $ \cup $	| Union | A ∪ B means everything in A or B |
+| $ \cap $	| Intersection | A ∩ B means everything common to both A and B |
 | - \ | Difference | A − B means everything in A that is not in B. Sometimes ∖ |
 | △ | Symmetric Difference | A △ B means elements in either set but not both |
 | c | Complement | Ac means everything in the Universal Set except A |
 | ∣ | Cardinality | ∣A∣ means the number of elements in A |
 | × | Cartesian Product | A × B means every element of A paired with every element of B.  This results in semantic and topological products  |
 
-## Semantic and Topological
+## Semantic and Structural/Topological
 
 | Symbol | Name | Meaning |
 |--------|------|---------|
@@ -38,3 +38,55 @@
 | ⋓ₛ | Semantic Union |  |
 | ⊎ | Multiset Union | Useful to preserve multiplicities because ordinary set algebra throws them away and this is important when polymorphic multi-dimensional sets are unioned.  If multisets do not need to be preserved then ∪ can be used instead. |
 
+## Set Theory
+| Symbol | Github Latex |
+|--------|------|
+|$\emptyset$ |\emptyset|
+|$\varnothing$ |\varnothing| \\
+$\in$ |\in| \\
+$\notin$ |\notin| \\
+$\subset$ |\subset| \\
+$\subseteq$ |\subseteq| \\
+$\supset$ |\supset| \\
+$\supseteq$ |\supseteq| \\
+$\cup$ |\cup| \\
+$\cap$ |\cap| \\
+$\setminus$ |\setminus| \\
+$\mathbb{N}$ |\mathbb{N}| \\
+$\mathbb{Z}$ |\mathbb{Z}| \\
+$\mathbb{R}$ |\mathbb{R}| \\
+$\mathbb{Q}$ |\mathbb{Q}| \\
+$\mathbb{U}$ |\mathbb{U}| \\
+$\mathbb{C}$ |\mathbb{C}| \\
+$\forall$ |\forall| \\
+$\exists$ |\exists| \\
+$\nexists$ |\nexists| \\
+
+## Set Algebra
+| Symbol | Github Latex |
+|--------|------|
+$\pm$  |\pm| \\
+$\mp$  |\mp| \\
+$\times$  |\times| \\
+$\div$  |\div| \\
+$\cdot$  |\cdot| \\
+$\ast$  |\ast| \\
+$\circ$  |\circ| \\
+$\propto$  |\propto| \\
+$\equiv$  |\equiv| \\
+$\neq$  |\neq| \\
+$\approx$  |\approx| \\
+$\leq$  |\leq| \\
+$\geq$  |\geq| \\
+
+## Set Logic
+| Symbol | Github Latex |
+|--------|------|
+$\Rightarrow$  |\Rightarrow| \\
+$\Leftarrow$ |\Leftarrow| \\
+$\Leftrightarrow$ |\Leftrightarrow| \\
+$\land$ |\land| \\
+$\lor$ |\lor| \\
+$\neg$ |\neg| \\
+$\top$ |\top| \\
+$\bot$ |\bot| \\
