@@ -1,6 +1,6 @@
 # Set Algebra
 
-This reference shows set algebra related symbols and typical meanings and some usage examples.  Some of tese may be of use when choosing the set abgebra capabilities.  At the point when any of the underlying set operations are supported, these will be explicitly shown in a Supported Table and removed from the other tables.
+This reference shows set algebra related symbols and typical meanings and some usage examples.  Some of these operations may be of use when choosing the set abgebra capabilities.  At the point when any of the underlying set operations are supported, these will be explicitly shown in a Supported Table and removed from the other tables.
 
 Supported set operations will have individual and composed unit tests which exercise the code paths and these will be accompanied by the associated expressions and data examples.
 
