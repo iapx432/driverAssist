@@ -82,6 +82,12 @@ $\neg$ |\neg| \\
 $\top$ |\top| \\
 $\bot$ |\bot| \\
 
+## SQL Correspondances
+
+| Set | SQL | Correspondance |
+|------------|-----|-------------|
+| $\cap$ | ```inner join``` | $A \cap B=$```select * from A inner join B```|
+
 ## References
 
 [OEIS LaTeX Reference](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
