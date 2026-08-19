@@ -86,7 +86,7 @@ $\bot$ |\bot| \\
 
 | Set | SQL | Correspondance |
 |------------|-----|-------------|
-| $\cap$ | ```inner join``` | $A \cap B=$```select columns from A inner join B on (A.key = B.key) ``` But not a good match really|
+| $\cap$ | ```inner join``` | $A \cap B=$```select * from A intersect select * from B```|
 
 ## References
 
