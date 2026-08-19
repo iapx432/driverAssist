@@ -37,7 +37,7 @@ Supported set operations will have individual and composed unit tests which exer
 | $\cong$ | Structural/isomorphic Equivalence | $A \cong B$ means $A$ and $B$ have equivalent structural topology even if their actual values differ (congruent) |
 | $\cong$ₛ | Semantic Equivalence | $A \cong ₛ B$  means $A$ and $B$ have equivalent semantic topology even if their actual values differ |
 | $⋐$ | Structural Subset | $A ⋐ B$ means does $A$'s data topology fits within $B$'s data topology | 
-| $⋐ₛ$ | Semantic Subset | $A ⋐ B$ means does $A$'s semantic topology fits within $B$'s semantic topology | 
+| $⋐ₛ$ | Semantic Subset | $A ⋐ₛ B$ means does $A$'s semantic topology fits within $B$'s semantic topology | 
 | $⋑$ | Structural Superset |  |
 | $⋑ₛ$ | Semantic Superset |  |
 | $⋒$ | Structural Intersection |  |
@@ -86,7 +86,7 @@ $\bot$ |\bot| \\
 
 | Set | SQL | Correspondance |
 |------------|-----|-------------|
-| $\cap$ | ```inner join``` | $A \cap B=$```select * from A intersect select * from B```|
+| $\cap$ | ```intersect``` | $A \cap B=$ ```select * from A intersect select * from B```|
 
 ## References
 
