@@ -16,7 +16,7 @@ Supported set operations will have individual and composed unit tests which exer
 |--------|------|---------|
 | $\varnothing$ | Empty Set | A set containing no elements |
 | $\mathbb{U}$ | Universal Set | The set containing all elements under consideration. Everything is relative to this |
-| $\in$ $\not\in$	| Element Of | $x \in A $ means $x$ is an element of $A$ |
+| $\in$ $\not\in$	| Element Of | $x \in A$ means $x$ is an element of $A$ |
 | $\subseteq$ $\not\subseteq$	| Subset | $A \subseteq B$ means every element of $A$ is also in $B$ |
 | $\subset$ $\not\subset$ | Proper Subset | $A \subset B$ means $A$ is a subset of $B$ but not equal to $B$ |
 | $\supseteq$ $\not\supseteq$ | Superset | $A \supseteq B$ means $A$ contains $B$ |
