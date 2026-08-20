@@ -67,7 +67,7 @@ export class S {
         }
     }
 
-    reconcile(reasoningContext) {
+    evaluate(reasoningContext) {
 
         // if the reasoningContext contains a reconciliation expression, then evaluate it and return the result as a new set.
 
