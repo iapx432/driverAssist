@@ -1,0 +1,57 @@
+﻿{
+    "archetypes": [
+        {
+            "archetypeName": "number",
+            "properties": {
+                "minimumValue": {
+                    "type": "number"
+                },
+                "maximumValue": {
+                    "type": "number"
+                },
+                "accuracy": {
+                    "type": "number"
+                },
+                "resolution": {
+                    "type": "number"
+                },
+                "requiredPreservation": {
+                    "type": "number"
+                },
+                "permittedComputationalError": {
+                    "type": "number"
+                }
+            }
+        }
+    ],
+    "archetypeInstances": [
+        {
+            "archetypeInstanceName": "number-latitude",
+            "archetypeName": "number",
+            "properties": {
+                "minimumValue": -90,
+                "maximumValue": 90,
+                "accuracy": 0.0000001,
+                "resolution": 0.0000001,
+                "requiredPreservation": 0.0000001,
+                "permittedComputationalError": 0.0000001
+            }
+        },
+        {
+            "archetypeInstanceName": "number-longitude",
+            "archetypeName": "number",
+            "properties": {
+                "minimumValue": -180,
+                "maximumValue": 180,
+                "accuracy": 0.0000001,
+                "resolution": 0.0000001,
+                "requiredPreservation": 0.0000001,
+                "permittedComputationalError": 0.0000001
+            }
+        }
+    ],
+    "properties": [
+        { "name": "latitude", "archetypeInstanceName": "number-latitude" },
+        { "name": "longitude", "archetypeInstanceName": "number-longitude" }
+    ]
+}
