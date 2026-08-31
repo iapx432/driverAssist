@@ -1,0 +1,81 @@
+﻿{
+    "properties": {
+        "latitude": {
+            "type": "archetypeInstance:number.latitude",
+            "required": true
+        },
+        "longitude": {
+            "type": "archetypeInstance:number.longitude",
+            "required": true
+        },
+        "enabled": {
+            "type": "boolean"
+        },
+        "historicalGeolocations": { 
+            "type": "dimension:geolocations",
+            "required": true
+        },
+        "bookmarkedGeolocations": { 
+            "type": "dimension:geolocations",
+            "required": true
+        } 
+    },
+    "archetypeInstances": {
+        "number.latitude": {
+            "archetype": "number",
+            "properties": {
+                "minimumValue": -90,
+                "maximumValue": 90,
+                "accuracy": 0.0000001,
+                "resolution": 0.0000001,
+                "requiredPreservation": 0.0000001,
+                "permittedComputationalError": 0.0000001
+            }
+        },
+        "number.longitude": {
+            "archetype": "number",
+            "properties": {
+                "minimumValue": -180,
+                "maximumValue": 180,
+                "accuracy": 0.0000001,
+                "resolution": 0.0000001,
+                "requiredPreservation": 0.0000001,
+                "permittedComputationalError": 0.0000001
+            }
+        }
+    },
+    "archetypes": {
+        "number": {
+            "minimumValue": {
+                "type": "number"
+            },
+            "maximumValue": {
+                "type": "number"
+            },
+            "accuracy": {
+                "type": "number"
+            },
+            "resolution": {
+                "type": "number"
+            },
+            "requiredPreservation": {
+                "type": "number"
+            },
+            "permittedComputationalError": {
+                "type": "number"
+            }
+        }
+    },
+    "dimensions": {
+        "geolocations": {
+            "properties": {
+                "latitude": {
+                    "type": "archetypeInstance:number.latitude"
+                },
+                "longitude": {
+                    "type": "archetypeInstance:number.longitude"
+                }                
+            }
+        }
+    }
+}
