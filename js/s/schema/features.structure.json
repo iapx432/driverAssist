@@ -47,22 +47,28 @@
     "archetypes": {
         "number": {
             "minimumValue": {
-                "type": "number"
+                "type": "number",
+                "required": true
             },
             "maximumValue": {
-                "type": "number"
+                "type": "number",
+                "required": true
             },
             "accuracy": {
-                "type": "number"
+                "type": "number",
+                "required": true
             },
             "resolution": {
-                "type": "number"
+                "type": "number",
+                "required": true
             },
             "requiredPreservation": {
-                "type": "number"
+                "type": "number",
+                "required": true
             },
             "permittedComputationalError": {
-                "type": "number"
+                "type": "number",
+                "required": true
             }
         }
     },
