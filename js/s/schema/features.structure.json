@@ -70,7 +70,16 @@
                 "type": "number",
                 "required": true
             }
-        }
+        },
+        "string": {
+            "characterDomain": {
+                "type": "string",
+                "required": true
+            },
+            "permittedCharacters": {
+                "type": "string",
+                "required": false
+            }
     },
     "dimensions": {
         "geolocations": {
