@@ -65,41 +65,50 @@
         "number": {
             "minimumValue": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "minimum permissible value"
             },
             "maximumValue": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "maximum permissible value"
             },
             "accuracy": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "how close to reality is the value expected to be"
             },
             "resolution": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "what differences between values need to remain distinguishable"
             },
             "requiredPreservation": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "what information about the value must survive transformations"
             },
             "permittedComputationalError": {
                 "type": "number",
-                "required": true
+                "required": true,
+                "description": "how much numerical error may processing introduce"
             }
         },
         "string": {
             "characterDomain": {
                 "type": "string",
-                "required": true
+                "required": true,
+                "description": "what translation dictionary is required to represent this string"
             },
             "permittedCharacters": {
                 "type": "string",
-                "required": false
+                "required": false,
+                "description": "what characters are permitted in this string"
             },
             "encounteredMaximumLength": {
                 "type": "number",
-                "required": false
+                "required": false,
+                "description": "if provided, records the maximum string length encountered so far, if not provided, no string has been encountered so far"
             }
     },
     "dimensions": {
