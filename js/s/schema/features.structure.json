@@ -8,6 +8,9 @@
             "type": "archetypeInstance:number.longitude",
             "required": true
         },
+        "postcode": {
+            "type": "archetypeInstance:string.postcode-uk"
+        },
         "enabled": {
             "type": "boolean"
         },
@@ -41,6 +44,20 @@
                 "resolution": 0.0000001,
                 "requiredPreservation": 0.0000001,
                 "permittedComputationalError": 0.0000001
+            }
+        },
+        "string.unicode": {
+            "archetype": "string",
+            "properties": {
+                "characterDomain": "unicode"
+            }
+        },
+        "string.postcode-uk": {
+            "archetype": "string",
+            "properties": {
+                "characterDomain": "ascii",
+                "permittedCharacters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ",
+                "encounteredMaximumLength": 8
             }
         }
     },
@@ -78,6 +95,10 @@
             },
             "permittedCharacters": {
                 "type": "string",
+                "required": false
+            },
+            "encounteredMaximumLength": {
+                "type": "number",
                 "required": false
             }
     },
